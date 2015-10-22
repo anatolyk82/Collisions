@@ -10,6 +10,9 @@ Item {
     property alias color: txt.color
     property alias text: txt.text
 
+    //in case if the label contains a link
+    signal linkClicked(string link)
+
     FontLoader {
         id: gameFontFont
         source: "../../assets/fonts/ofl.ttf"
@@ -18,7 +21,7 @@ Item {
         id: txt
         anchors.left: parent.left
         anchors.verticalCenter: parent.verticalCenter
-        text: "Fancy font"
         font.family: gameFontFont.name
+        onLinkActivated: { label.linkClicked(link) }
     }
 }

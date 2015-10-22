@@ -1,53 +1,58 @@
+import QtQuick 2.4
 import VPlay 2.0
-import QtQuick 2.0
 import "../common"
 
-SceneBase {
+BaseScene {
     id: menuScene
 
-    // signal indicating that the selectLevelScene should be displayed
+    headerText: qsTr("Collisions")
+
+    // signals that indicating that the an item menu had been selected
     signal selectLevelPressed
-    // signal indicating that the creditsScene should be displayed
+    signal settingsPressed
     signal creditsPressed
+    signal quitPressed
 
-    // background
-    Rectangle {
-        anchors.fill: parent.gameWindowAnchorItem
-        color: "#47688e"
-    }
-
-    // the "logo"
-    Text {
-        anchors.horizontalCenter: parent.horizontalCenter
-        y: 30
-        font.pixelSize: 30
-        color: "#e9e9e9"
-        text: "MultiSceneMultiLevel"
-    }
+    //do not need to see the back button here
+    buttonBack.visible: false
 
     // menu
     Column {
         anchors.centerIn: parent
-        spacing: 10
+        anchors.verticalCenterOffset: 10
+        spacing: 18
+        z: 5
         MenuButton {
-            text: "Levels"
+            text: qsTr("Game")
+            imageSource: "../../assets/buttons/button_game_blue.png"
+            imageSourcePressed: "../../assets/buttons/button_game_yellow.png"
             onClicked: selectLevelPressed()
         }
         MenuButton {
-            text: "Credits"
+            text: qsTr("Settings")
+            imageSource: "../../assets/buttons/button_settings_blue.png"
+            imageSourcePressed: "../../assets/buttons/button_settings_yellow.png"
+            onClicked: settingsPressed()
+        }
+        MenuButton {
+            text: qsTr("Credits")
+            imageSource: "../../assets/buttons/button_about_blue.png"
+            imageSourcePressed: "../../assets/buttons/button_about_yellow.png"
             onClicked: creditsPressed()
+        }
+        MenuButton {
+            text: qsTr("Quit")
+            imageSource: "../../assets/buttons/button_quit_blue.png"
+            imageSourcePressed: "../../assets/buttons/button_quit_yellow.png"
+            onClicked: quitPressed()
         }
     }
 
-    // a little V-Play logo is always nice to have, right?
-    Image {
-        source: "../../assets/img/vplay-logo.png"
-        width: 60
-        height: 60
-        anchors.right: menuScene.gameWindowAnchorItem.right
-        anchors.rightMargin: 10
-        anchors.bottom: menuScene.gameWindowAnchorItem.bottom
-        anchors.bottomMargin: 10
+    //TODO: maybe there will be some moving balls on the scene
+    PhysicsWorld {
+        id: world
+        gravity: Qt.point(0,0)
+        running: true
     }
 }
 

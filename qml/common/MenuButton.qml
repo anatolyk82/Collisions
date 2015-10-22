@@ -5,7 +5,7 @@ Rectangle {
     id: button
 
     width: imageButton.width + buttonText.width
-    height: 30
+    height: 36
 
     color: "transparent"
 
@@ -48,8 +48,8 @@ Rectangle {
         id: buttonText
         anchors.verticalCenter: parent.verticalCenter
         anchors.left: imageButton.right
-        anchors.leftMargin: 10
-        font.pixelSize: 18
+        anchors.leftMargin: 12
+        font.pixelSize: 20
         color: mouseArea.pressed ? textColorPressed : (button.checkable ? (button.checked ? textColor : textColorChecked) : textColor)
     }
 
