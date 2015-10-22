@@ -1,19 +1,13 @@
-import QtQuick 2.0
+import QtQuick 2.4
+import VPlay 2.0
 
 Rectangle {
     id: button
-    // this will be the default size, it is same size as the contained text + some padding
-    width: buttonText.width+ paddingHorizontal*2
-    height: buttonText.height+ paddingVertical*2
 
-    color: "#e9e9e9"
-    // round edges
-    radius: 10
+    width: imageButton.width + buttonText.width
+    height: 30
 
-    // the horizontal margin from the Text element to the Rectangle at both the left and the right side.
-    property int paddingHorizontal: 10
-    // the vertical margin from the Text element to the Rectangle at both the top and the bottom side.
-    property int paddingVertical: 5
+    color: "transparent"
 
     // access the text of the Text component
     property alias text: buttonText.text
@@ -21,20 +15,57 @@ Rectangle {
     // this handler is called when the button is clicked.
     signal clicked
 
-    Text {
-        id: buttonText
-        anchors.centerIn: parent
-        font.pixelSize: 18
-        color: "black"
+    //images of button for different states
+    property url imageSource: ""
+    property url imageSourcePressed: ""
+    property url imageSourceChecked: ""
+
+    //whether the button is checkable
+    property bool checkable: false
+    property bool checked: false
+
+    //colors of text
+    property color textColor: "black"
+    property color textColorPressed: "yellow"
+    property color textColorChecked: "grey"
+
+    //size of text
+    property alias textSize: buttonText.font.pixelSize
+
+
+    MultiResolutionImage {
+        id: imageButton
+        smooth: true
+        antialiasing: true
+        anchors.verticalCenter: parent.verticalCenter
+        anchors.left: parent.left
+        height: parent.height*0.9
+        fillMode: Image.PreserveAspectFit
+        source: mouseArea.pressed ? imageSourcePressed : (button.checkable ? (button.checked ? imageSource : imageSourceChecked) : imageSource)
     }
 
+    Label {
+        id: buttonText
+        anchors.verticalCenter: parent.verticalCenter
+        anchors.left: imageButton.right
+        anchors.leftMargin: 10
+        font.pixelSize: 18
+        color: mouseArea.pressed ? textColorPressed : (button.checkable ? (button.checked ? textColor : textColorChecked) : textColor)
+    }
+
+    //cover the button with a mouse area
     MouseArea {
         id: mouseArea
         anchors.fill: parent
-        hoverEnabled: true
-        onClicked: button.clicked()
-        onPressed: button.opacity = 0.5
-        onReleased: button.opacity = 1
+        //hoverEnabled: true
+        onClicked: {
+            if( button.checkable ) {
+                button.checked = !button.checked
+            }
+            button.clicked()
+        }
+        //onEntered: {}
+        //onExited: {}
     }
 }
 
