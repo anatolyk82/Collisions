@@ -43,7 +43,6 @@ EntityBase {
     function pushBall() {
         var localForwardVector = ballCollider.body.toWorldVector(Qt.point(ball.impulseX,ball.impulseY));
         ballCollider.body.applyLinearImpulse( localForwardVector, ballCollider.body.getWorldCenter() );
-        //console.log("1:Push the ball:"+localForwardVector.x+";"+localForwardVector.y)
     }
 
     Component.onCompleted: {

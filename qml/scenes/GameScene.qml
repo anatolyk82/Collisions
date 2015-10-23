@@ -111,13 +111,49 @@ BaseScene {
             id: usersBall
         }
 
-        /*BonusEntity {
+        BonusEntity {
             x: 100
             y: 100
-            onBonusHasTouchedByUser: {
-                console.log("MMMMMMMMM")
+        }
+
+
+        MouseArea {
+            property Body selectedBody: null
+            property MouseJoint mouseJointWhileDragging: null
+
+            anchors.fill: parent
+            onPressed: {
+                //gameScene.entitySelected(null)
+                selectedBody = world.bodyAt( Qt.point(mouseX, mouseY))
+                if( selectedBody ) {
+                    mouseJointWhileDragging = mouseJoint.createObject(world)
+                    mouseJointWhileDragging.target = Qt.point(mouseX, mouseY)
+                    mouseJointWhileDragging.bodyB = selectedBody
+                }
             }
-        }*/
+            onPositionChanged: {
+                if( mouseJointWhileDragging ) {
+                    mouseJointWhileDragging.target = Qt.point(mouseX, mouseY)
+                }
+            }
+            onReleased: {
+                if(selectedBody) {
+                    selectedBody = null
+                    if(mouseJointWhileDragging) {
+                        mouseJointWhileDragging.destroy()
+                    }
+                }
+            }
+        }
+    }
+
+    Component {
+        id: mouseJoint
+        MouseJoint {
+            maxForce:  100000//world.pixelsPerMetr
+            dampingRatio: 0.5 //0-1
+            frequencyHz: 1
+        }
     }
 
 

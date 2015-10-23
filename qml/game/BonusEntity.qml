@@ -12,13 +12,6 @@ EntityBase {
     property double impulseX
     property double impulseY
 
-    //this signal emits whenever a user touches a bonus box
-    signal bonusHasTouchedByUser()
-
-    //this signal emits whenever a ball touches a bonus box
-    //it can be used, for instance, for destroying the bonus by other balls
-    signal bonusHasTouchedByBall()
-
     BoxCollider {
         id: bonusCollider
 
@@ -35,14 +28,7 @@ EntityBase {
         bodyType: Body.Dynamic
 
         fixture.onBeginContact: {
-            var body = other.getBody();
-            var collidedEntity = body.target;
-            var collidedEntityType = collidedEntity.entityType;
-            if( collidedEntityType == "usersBallType" ) {
-                bonus.bonusHasTouchedByUser()
-            } else if( collidedEntityType == "usersBallType" ) {
-                bonus.bonusHasTouchedByBall()
-            }
+            console.log("aaa")
         }
     }
 
