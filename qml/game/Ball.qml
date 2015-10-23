@@ -36,7 +36,7 @@ EntityBase {
         frameHeight: 90
         source: "../../assets/img/balls.png"
         running: false
-        frameX: Math.round( utils.generateRandomValueBetween(1,8) ) *frameWidth
+        frameX: Math.round( utils.generateRandomValueBetween(1,8) )*frameWidth
     }
 
     function pushBall() {

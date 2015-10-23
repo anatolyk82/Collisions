@@ -12,7 +12,7 @@ Item {
     /* configuring of the generator */
     property int intervalBetweenBalls: 10000
     property int preparatoryInterval: 3000
-    property int ballSize: 20       //size of generating ball
+    property int ballSize: 15       //size of generating ball
     property int ballImpulse: 200
     property int ballImpulseAdditional: 300
 

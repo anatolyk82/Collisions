@@ -6,34 +6,39 @@ EntityBaseDraggable {
 
     entityType: "usersBallType"
 
+    property alias radius: ballCollider.radius
+    property alias body: ballCollider.body
+
     draggingAllowed: true
     selectionMouseArea.anchors.fill: padding
-    selectionMouseArea.drag.minimumX: guiSettings.wallWidthLeft
-    selectionMouseArea.drag.maximumX: usersBall.parent.width - guiSettings.wallWidthLeft - guiSettings.wallWidthRight - usersBall.radius
-    selectionMouseArea.drag.minimumY: guiSettings.wallWidthTop
-    selectionMouseArea.drag.maximumY: usersBall.parent.height - guiSettings.wallWidthTop - guiSettings.wallWidthBottom - usersBall.radius
+    selectionMouseArea.drag.minimumX: 0
+    selectionMouseArea.drag.maximumX: parent.width - 2*usersBall.radius
+    selectionMouseArea.drag.minimumY: 0
+    selectionMouseArea.drag.maximumY: parent.height - 2*usersBall.radius
 
 
 
-    dragOffset: Qt.point(0,0)
+    dragOffset: Qt.point(-1,-1)
 
-    property alias radius: boxCollider.radius
-
-    Rectangle {
+    MultiResolutionImage {
         id: padding
-        width: boxCollider.radius*2
+        x:ballCollider.x
+        y:ballCollider.y
+        width: ballCollider.radius*2
         height: width
-        radius: width/2
-        color: "blue"
+        source: "../../assets/img/usersBall.png"
+        antialiasing: true
     }
 
     CircleCollider {
-        id: boxCollider
+        id: ballCollider
         radius: 20
+        width: usersBall.radius
+        height: usersBall.radius
         anchors.centerIn: parent
 
         bodyType: Body.Static
-        density: 0.5
+        density: 0
         friction: 0
         restitution: 1
 

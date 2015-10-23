@@ -43,7 +43,7 @@ BaseScene {
         id: world
         gravity: Qt.point(0,0)
         running: gameScene.running
-        debugDrawVisible: false
+        //debugDrawVisible: false
 
         //walls aren't visible because their edges are at appropriate edges of the screen
         Wall {
@@ -89,6 +89,12 @@ BaseScene {
 
         BallGenerator {
             id: generator
+        }
+
+        UsersBall {
+            id: usersBall
+            x: parent.width/2
+            y: parent.height/2
         }
     }
 
