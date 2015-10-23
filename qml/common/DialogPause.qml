@@ -13,6 +13,9 @@ MultiResolutionImage {
     height: parent.height*0.7
     width: parent.width*0.4
 
+    signal resumeClicked()
+    signal restartClicked()
+
     Column {
         spacing: 5
         anchors.centerIn: parent
@@ -54,6 +57,7 @@ MultiResolutionImage {
             onClicked: {
                 imageDialogPause.close()
                 //continue the game
+                imageDialogPause.resumeClicked()
             }
         }
         MenuButton {
@@ -66,6 +70,7 @@ MultiResolutionImage {
             onClicked: {
                 imageDialogPause.close()
                 //retsart the game
+                imageDialogPause.restartClicked()
             }
         }
     }

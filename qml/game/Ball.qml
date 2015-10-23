@@ -4,6 +4,8 @@ import QtQuick 2.3
 EntityBase {
     id: ball
 
+    entityType: "ballType"
+
     property alias radius: ballCollider.radius
     property alias body: ballCollider.body
 

@@ -50,7 +50,7 @@ BaseScene {
                             if( !isLevelLock( index, stars ) ) {
                                 gameScene.currentLevel = level
                                 app.state = "game"
-                                gameScene.running = true //start the pysics world
+                                gameScene.start() //start the pysics world
                             }
                         }
                     }

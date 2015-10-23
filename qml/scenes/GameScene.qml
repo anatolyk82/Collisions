@@ -24,11 +24,27 @@ BaseScene {
         text: ""
         imageSource: "../../assets/buttons/button_pause_blue.png"
         imageSourcePressed: "../../assets/buttons/button_pause_yellow.png"
-        onClicked: { dialogPause.open() }
+        onClicked: {
+            gameScene.pause( true )
+            dialogPause.open()
+        }
+    }
+
+    onBackButtonPressed: {
+        gameScene.stop()
+        dialogPause.close()
     }
 
     DialogPause {
         id: dialogPause
+        z: 5
+        onResumeClicked: {
+            gameScene.pause( false )
+        }
+        onRestartClicked: {
+            gameScene.stop()
+            gameScene.start()
+        }
     }
 
     Label {
@@ -42,7 +58,7 @@ BaseScene {
     PhysicsWorld {
         id: world
         gravity: Qt.point(0,0)
-        running: gameScene.running
+        running: false
         //debugDrawVisible: false
 
         //walls aren't visible because their edges are at appropriate edges of the screen
@@ -93,14 +109,37 @@ BaseScene {
 
         UsersBall {
             id: usersBall
-            x: parent.width/2
-            y: parent.height/2
         }
     }
 
-    onRunningChanged: {
-        if( running ) generator.start()
+
+    /**** manage the game scene ****/
+    function start() {
+        world.running = true
+        usersBall.x = world.width/2
+        usersBall.y = world.height/2
+        generator.start()
     }
+
+    function pause( isPaused ) {
+        if( isPaused ) {
+            generator.stop()
+            world.running = false
+        } else {
+            generator.start()
+            world.running = true
+        }
+    }
+
+    function stop() {
+        generator.stop()
+        //stop the physics world
+        world.running = false
+        //remove all balls
+        var toRemoveEntityTypes = ["ballType"];
+        entityManager.removeEntitiesByFilter(toRemoveEntityTypes);
+    }
+
 
     Component.onCompleted: {
         dialogPause.close()
