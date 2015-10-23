@@ -10,14 +10,13 @@ Item {
     id: generator
 
     /* configuring of the generator */
-    property int intervalBetweenBalls: 3000//10000
-    property int preparatoryInterval: 1000//3000
+    property int intervalBetweenBalls: 10000
+    property int preparatoryInterval: 3000
     property int ballSize: 15       //size of generating ball
     property int ballImpulse: 200
     property int ballImpulseAdditional: 300
 
     property bool running: true     //whether the generator is working
-
 
     /* internall properties */
     property real ballX: 0.0

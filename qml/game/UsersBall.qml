@@ -3,11 +3,16 @@ import QtQuick 2.5
 
 EntityBase {
     id: ball
+    z: 5
 
     entityType: "usersBallType"
 
     property alias radius: ballCollider.radius
     property alias body: ballCollider.body
+
+    /* health points of the user's ball */
+    property int totalHealth: 100
+    property int currentHealth: totalHealth
 
     Image {
         id: ballImage
@@ -29,7 +34,10 @@ EntityBase {
         bodyType: Body.Dynamic
 
         fixture.onBeginContact: {
-            //console.log("Collision")
+            var body = other.getBody();
+            var collidedEntity = body.target;
+            var collidedEntityType = collidedEntity.entityType;
+            console.log(">>> "+collidedEntityType)
         }
     }
 }

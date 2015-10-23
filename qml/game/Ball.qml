@@ -3,6 +3,7 @@ import QtQuick 2.3
 
 EntityBase {
     id: ball
+    z: 1
 
     entityType: "ballType"
 
@@ -11,6 +12,9 @@ EntityBase {
 
     property double impulseX
     property double impulseY
+
+    /* how many health points this ball takes from the user's ball */
+    property int damage: 10
 
     CircleCollider {
         id: ballCollider

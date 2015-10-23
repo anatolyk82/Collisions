@@ -8,14 +8,21 @@ EntityBase {
 
     property alias sizeBox: bonusCollider.width
     property alias body: bonusCollider.body
+    property alias sourceImage: imageBonus.source
 
-    property double impulseX
-    property double impulseY
+    Image {
+        id: imageBonus
+        source: ""
+        x: bonusCollider.x
+        y: bonusCollider.y
+        width: sizeBox
+        height: sizeBox
+    }
 
     BoxCollider {
         id: bonusCollider
 
-        width: 20
+        width: 30
         height: width
 
         sensor: true
@@ -26,20 +33,6 @@ EntityBase {
         friction: 0
         restitution: 1
         bodyType: Body.Dynamic
-
-        fixture.onBeginContact: {
-            console.log("aaa")
-        }
     }
-
-    Rectangle {
-        id: padding
-        width: bonus.sizeBox
-        height: width
-        color: "red"
-        x: bonusCollider.x
-        y: bonusCollider.y
-    }
-
 
 }

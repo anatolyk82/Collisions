@@ -104,16 +104,15 @@ BaseScene {
         }
 
         BallGenerator {
-            id: generator
+            id: ballGenerator
         }
 
         UsersBall {
             id: usersBall
         }
 
-        BonusEntity {
-            x: 100
-            y: 100
+        MedpackGenerator {
+            id: medpackGenerator
         }
 
 
@@ -123,9 +122,10 @@ BaseScene {
 
             anchors.fill: parent
             onPressed: {
-                //gameScene.entitySelected(null)
                 selectedBody = world.bodyAt( Qt.point(mouseX, mouseY))
                 if( selectedBody ) {
+                    //if the user selected a body, create a new MouseJoint
+                    //and connect the joint with the body
                     mouseJointWhileDragging = mouseJoint.createObject(world)
                     mouseJointWhileDragging.target = Qt.point(mouseX, mouseY)
                     mouseJointWhileDragging.bodyB = selectedBody
@@ -137,6 +137,7 @@ BaseScene {
                 }
             }
             onReleased: {
+                //remove the created MouseJoint if the user pressed a body
                 if(selectedBody) {
                     selectedBody = null
                     if(mouseJointWhileDragging) {
@@ -162,22 +163,26 @@ BaseScene {
         world.running = true
         usersBall.x = world.width/2
         usersBall.y = world.height/2
-        generator.start()
+        ballGenerator.start()
+        medpackGenerator.start()
     }
 
     function pause( isPaused ) {
         if( isPaused ) {
-            generator.stop()
+            medpackGenerator.stop()
+            ballGenerator.stop()
             world.running = false
         } else {
-            generator.start()
+            medpackGenerator.start()
+            ballGenerator.start()
             world.running = true
         }
     }
 
     function stop() {
-        generator.stop()
-        //stop the physics world
+        medpackGenerator.stop()
+        ballGenerator.stop()
+        //stop the physic world
         world.running = false
         //remove all balls
         var toRemoveEntityTypes = ["ballType"];

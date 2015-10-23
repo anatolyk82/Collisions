@@ -39,5 +39,7 @@ ios {
 DISTFILES += \
     qml/common/DialogPause.qml \
     qml/game/BallGenerator.qml \
-    qml/game/BonusEntity.qml
+    qml/game/BonusEntity.qml \
+    qml/game/MedPack.qml \
+    qml/game/MedpackGenerator.qml
 
