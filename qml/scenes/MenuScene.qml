@@ -49,10 +49,11 @@ BaseScene {
     }
 
     //TODO: maybe there will be some moving balls on the scene
-    PhysicsWorld {
+    /*PhysicsWorld {
         id: world
         gravity: Qt.point(0,0)
-        running: true
-    }
+        running: false
+        debugDrawVisible: false
+    }*/
 }
 

@@ -36,5 +36,7 @@ ios {
     OTHER_FILES += $$QMAKE_INFO_PLIST
 }
 
-DISTFILES +=
+DISTFILES += \
+    qml/common/DialogPause.qml \
+    qml/game/BallGenerator.qml
 
