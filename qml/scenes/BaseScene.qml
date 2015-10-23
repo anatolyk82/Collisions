@@ -27,7 +27,7 @@ SceneBase {
         anchors.top: parent.top
         anchors.topMargin: 10
         anchors.left: parent.left
-        anchors.leftMargin: 10
+        anchors.leftMargin: 5
         text: qsTr("Back")
         imageSource: "../../assets/buttons/button_menu_blue.png"
         imageSourcePressed: "../../assets/buttons/button_menu_yellow.png"
