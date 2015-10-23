@@ -13,6 +13,10 @@ EntityBase {
     /* health points of the user's ball */
     property int totalHealth: 100
     property int currentHealth: totalHealth
+    onCurrentHealthChanged: {
+        currentHealth = currentHealth < 0 ? 0 : ((currentHealth > totalHealth) ? totalHealth : currentHealth)
+        console.log("HEALTH:"+currentHealth)
+    }
 
     Image {
         id: ballImage
@@ -37,7 +41,12 @@ EntityBase {
             var body = other.getBody();
             var collidedEntity = body.target;
             var collidedEntityType = collidedEntity.entityType;
-            console.log(">>> "+collidedEntityType)
+            //console.log(">>> "+collidedEntityType)
+            if( collidedEntityType == "ballType" ) {
+                currentHealth -= collidedEntity.damage
+            } else if( collidedEntityType == "medpackType" ) {
+                currentHealth += collidedEntity.health
+            }
         }
     }
 }

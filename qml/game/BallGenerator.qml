@@ -12,7 +12,7 @@ Item {
     /* configuring of the generator */
     property int intervalBetweenBalls: 10000
     property int preparatoryInterval: 3000
-    property int ballSize: 15       //size of generating ball
+    property int ballSize: 15       //size of a generating ball
     property int ballImpulse: 200
     property int ballImpulseAdditional: 300
 
@@ -27,7 +27,7 @@ Item {
         //fix a new position of a future ball
         generateNewPosotion()
 
-        //create a partice system to show a gamer where a new ball will appear
+        //create a partice system to show the user where a new ball will appear
         fireParticle.running = true
         //generatedParticlesId = entityManager.createEntityFromComponent( componentParticles )
         //console.log("generatedParticlesId="+generatedParticlesId)
@@ -93,7 +93,7 @@ Item {
 
 
 
-    /* This timer counts an interval between two balls minus the preparatory interval */
+    /* This timer counts the interval between two balls minus the preparatory interval */
     Timer {
         id: timerIntervalBetweenBalls
         interval: (generator.intervalBetweenBalls - generator.preparatoryInterval)
@@ -121,7 +121,7 @@ Item {
         } else if( ballY > (generator.parent.height - 2*ballSize)) {
             ballY -= 2*ballSize
         }
-        console.log("a new ball will be created at X:"+ballX+" Y:"+ballY)
+        //console.log("a new ball will be created at X:"+ballX+" Y:"+ballY)
     }
 }
 

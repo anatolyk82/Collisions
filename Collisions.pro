@@ -41,5 +41,6 @@ DISTFILES += \
     qml/game/BallGenerator.qml \
     qml/game/BonusEntity.qml \
     qml/game/MedPack.qml \
-    qml/game/MedpackGenerator.qml
+    qml/game/MedpackGenerator.qml \
+    qml/game/HealthBar.qml
 

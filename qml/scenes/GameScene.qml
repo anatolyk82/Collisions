@@ -54,6 +54,13 @@ BaseScene {
         text: qsTr("Level") + ":" + currentLevel
     }
 
+    HealthBar {
+        id: barHealth
+        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.bottom: parent.bottom
+        anchors.bottomMargin: 10
+        //value: usersBall.currentHealth
+    }
 
     PhysicsWorld {
         id: world
@@ -109,10 +116,14 @@ BaseScene {
 
         UsersBall {
             id: usersBall
+            onCurrentHealthChanged: {
+                barHealth.value = currentHealth
+            }
         }
 
         MedpackGenerator {
             id: medpackGenerator
+            probabilityMedpack: 5
         }
 
 
