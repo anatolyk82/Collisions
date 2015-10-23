@@ -14,7 +14,6 @@ EntityBase {
 
     CircleCollider {
         id: ballCollider
-        radius: guiSettings.ballSize
         anchors.centerIn: parent
 
         density: 0

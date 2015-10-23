@@ -43,8 +43,17 @@ EntityBaseDraggable {
         restitution: 1
 
         fixture.onBeginContact: {
-            console.log("rrr")
+            //console.log("rrr")
         }
+    }
+
+    onBeginContactWhileDragged: {
+        console.log("-------------------->>>")
+        var fixture = other;
+        var body = other.getBody();
+        var collidedEntity = body.target;
+        var collidedEntityType = collidedEntity.entityType;
+        console.log("onBeginContactWhileDragged: collided with entity " + collidedEntity)
     }
 
 }

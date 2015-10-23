@@ -110,6 +110,14 @@ BaseScene {
         UsersBall {
             id: usersBall
         }
+
+        /*BonusEntity {
+            x: 100
+            y: 100
+            onBonusHasTouchedByUser: {
+                console.log("MMMMMMMMM")
+            }
+        }*/
     }
 
 
