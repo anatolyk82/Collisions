@@ -5,6 +5,7 @@ import VPlay 2.0
 
 MultiResolutionImage {
     id: imageDialogPause
+    z: 10
     visible: false
     smooth: true
     antialiasing: true

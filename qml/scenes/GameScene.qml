@@ -39,7 +39,7 @@ BaseScene {
 
     DialogPause {
         id: dialogPause
-        z: 5
+        z: 10
         onResumeClicked: {
             gameScene.pause( false )
         }
@@ -49,7 +49,20 @@ BaseScene {
         }
     }
 
+    DialogGameOver {
+        id: dialogGameOver
+        z: 11
+        onMenuClicked: {
+            gameScene.backButtonPressed()
+        }
+        onRestartClicked: {
+            gameScene.stop()
+            gameScene.start()
+        }
+    }
+
     Label {
+        id: labelOfCurrentLevel
         anchors.top: parent.top
         anchors.topMargin: 10
         anchors.horizontalCenter: parent.horizontalCenter
@@ -61,7 +74,6 @@ BaseScene {
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.bottom: parent.bottom
         anchors.bottomMargin: 10
-        //value: usersBall.currentHealth
     }
 
     PhysicsWorld {
@@ -165,6 +177,8 @@ BaseScene {
 
 
     /**** manage the game scene ****/
+
+    /* this starts the game */
     function start() {
         //create the user's ball
         entityManager.createEntityFromUrlWithProperties ( Qt.resolvedUrl("../game/UsersBall.qml"),
@@ -181,8 +195,10 @@ BaseScene {
         //start game generators
         ballGenerator.start()
         medpackGenerator.start()
+        buttonPause.visible = true
     }
 
+    /* this function pauses the game */
     function pause( isPaused ) {
         if( isPaused ) {
             medpackGenerator.stop()
@@ -195,6 +211,7 @@ BaseScene {
         }
     }
 
+    /* this function stops the game */
     function stop() {
         medpackGenerator.stop()
         ballGenerator.stop()
@@ -205,9 +222,17 @@ BaseScene {
         entityManager.removeEntitiesByFilter(toRemoveEntityTypes);
     }
 
+    /* it calls whenever health changes */
     function currentHealthChangedSlot() {
         barHealth.value = entityManager.getEntityById("usersBall").currentHealth
+        //if the ball doesn't have health anomore, stop the game
+        if( barHealth.value <= 0 ) {
+            gameScene.pause(true)
+            dialogGameOver.open()
+            buttonPause.visible = false
+        }
     }
+
 
     Component.onCompleted: {
         dialogPause.close()

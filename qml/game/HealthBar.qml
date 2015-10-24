@@ -23,6 +23,7 @@ Item {
 
         Rectangle {
             anchors.verticalCenter: parent.verticalCenter
+            anchors.verticalCenterOffset: -1
             anchors.left: parent.left
             anchors.leftMargin: bar.width*0.25
             width: maxValue != 0 ? (bar.width - bar.width*0.33)*(value/maxValue) : (bar.width - bar.width*0.33)
