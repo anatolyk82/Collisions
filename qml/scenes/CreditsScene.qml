@@ -41,7 +41,7 @@ BaseScene {
                 anchors.top: lblProgramming.bottom
                 anchors.topMargin: 12
                 text: qsTr("Music") + ": <a href='http://soundimage.org'>http://soundimage.org</a>"
-                onLinkClicked: { Qt.openUrlExternally(link) }
+                //onLinkClicked: { Qt.openUrlExternally(link) }
             }
             Label {
                 id: lblArt
@@ -49,7 +49,7 @@ BaseScene {
                 anchors.top: lblSounds.bottom
                 anchors.topMargin: 12
                 text: qsTr("Art") + ": <a href='http://www.gameart2d.com'>http://www.gameart2d.com</a>"
-                onLinkClicked: { Qt.openUrlExternally(link) }
+                //onLinkClicked: { Qt.openUrlExternally(link) }
             }
             Label {
                 id: lblFont
@@ -57,7 +57,7 @@ BaseScene {
                 anchors.top: lblArt.bottom
                 anchors.topMargin: 12
                 text: qsTr("Font") + ": <a href='http://1001freefonts.com'>http://1001freefonts.com</a>"
-                onLinkClicked: { Qt.openUrlExternally(link) }
+                //onLinkClicked: { Qt.openUrlExternally(link) }
             }
             Label {
                 id: lblPowered

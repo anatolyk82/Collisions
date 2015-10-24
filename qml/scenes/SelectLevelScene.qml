@@ -9,6 +9,7 @@ BaseScene {
 
     headerText: qsTr("Levels")
 
+    property bool howToPlayVisible: false
 
     MenuButton {
         id: buttonHowToPlay
@@ -16,11 +17,12 @@ BaseScene {
         anchors.top: parent.top
         anchors.topMargin: 10
         anchors.right: parent.right
-        anchors.rightMargin: 5
-        text: qsTr("How to play")
+        anchors.rightMargin: 10
+        text: howToPlayVisible ? qsTr("Back to levels") : qsTr("How to play")
         imageSource: "../../assets/buttons/button_about_blue.png"
         imageSourcePressed: "../../assets/buttons/button_about_yellow.png"
         onClicked: {
+            howToPlayVisible = !howToPlayVisible
         }
     }
 
@@ -45,8 +47,25 @@ BaseScene {
             //border.color: "black"
             color: "transparent"
             clip: true
+            Flickable {
+                visible: howToPlayVisible == true
+                anchors.fill: parent
+                clip: true
+                contentWidth: itemContent.width
+                contentHeight: itemContent.height
+                flickableDirection: Flickable.VerticalFlick
+                Label {
+                    id: itemContent
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    width: gridWrapper.width
+                    wrapMode: Text.WordWrap
+                    text: qsTr(" Not everyone likes when someone is different, not like others. The same has happened to one big ball. It's bigger, it's heavier and it has some decorations on the surface. Other balls do not like it and they always try to destroy the ball just because it differs. Your purpose is to move the big ball over the game field to avoid collisions with other balls. Be careful, the big ball is heavy and you can lose control over the ball by moving it too fast. Each level will be harder for you but you should try. Save the big ball !")
+                }
+            }
+
             GridView {
                 id: levelsGrid
+                visible: howToPlayVisible == false
                 anchors.fill: parent
                 model: levelModel
                 cellWidth: gridWrapper.width*0.25
