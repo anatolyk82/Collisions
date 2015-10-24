@@ -44,5 +44,6 @@ DISTFILES += \
     qml/game/MedpackGenerator.qml \
     qml/game/HealthBar.qml \
     qml/common/DialogGameOver.qml \
-    qml/game/GameTimer.qml
+    qml/game/GameTimer.qml \
+    qml/common/DialogGameEnded.qml
 

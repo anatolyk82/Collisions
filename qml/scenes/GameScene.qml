@@ -61,6 +61,11 @@ BaseScene {
         }
     }
 
+    DialogGameEnded {
+        id: dialogGameEnded
+        z: 12
+    }
+
     Label {
         id: labelOfCurrentLevel
         anchors.top: parent.top
@@ -85,7 +90,12 @@ BaseScene {
         anchors.rightMargin: 5
         anchors.bottom: parent.bottom
         anchors.bottomMargin: 5
+
+        gameMillisecondsTotal: 30000
         onTimerIsOver: {
+            buttonPause.visible = false
+            gameScene.pause( true )
+            dialogGameEnded.open( grantStarsForCurrentLevel() )
         }
     }
 
@@ -194,6 +204,9 @@ BaseScene {
 
     /* this starts the game */
     function start() {
+        //close all previous dialogs
+        dialogGameEnded.close()
+        dialogPause.close()
         //create the user's ball
         entityManager.createEntityFromUrlWithProperties ( Qt.resolvedUrl("../game/UsersBall.qml"),
                       { x: (world.width/2-usersBallSize), y: (world.height/2-usersBallSize), radius: usersBallSize, } )
@@ -209,6 +222,7 @@ BaseScene {
         //start game generators
         ballGenerator.start()
         medpackGenerator.start()
+        //start timer
         gameTimer.start()
         buttonPause.visible = true
     }
@@ -247,6 +261,17 @@ BaseScene {
             gameScene.pause(true)
             dialogGameOver.open()
             buttonPause.visible = false
+        }
+    }
+
+
+    function grantStarsForCurrentLevel() {
+        if( (barHealth.value > 0)&&(barHealth.value < 33) ) {
+            return 1
+        } else if( (barHealth.value >= 33)&&(barHealth.value <= 66) ) {
+            return 2
+        } else {
+            return 3
         }
     }
 
