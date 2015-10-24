@@ -15,6 +15,7 @@ Item {
     property int ballSize: 15       //size of a generating ball
     property int ballImpulse: 200
     property int ballImpulseAdditional: 300
+    property int ballDamage: 10
 
     property bool running: true     //whether the generator is working
 
@@ -82,7 +83,8 @@ Item {
                             y: ballY,
                             radius: generator.ballSize,
                             impulseX: impulseX,
-                            impulseY: impulseY
+                            impulseY: impulseY,
+                            damage: ballDamage
                         }
                         )
 

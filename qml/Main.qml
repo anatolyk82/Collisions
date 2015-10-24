@@ -1,5 +1,7 @@
 import QtQuick 2.4
 import VPlay 2.0
+import QtQuick.XmlListModel 2.0
+
 import "scenes"
 
 //com.qtproject.anatolko.Collisions
@@ -119,9 +121,67 @@ GameWindow {
         }
     }
 
+
+    /*--- initialization of levels ---*/
+
+    ListModel { id: levelModel }
+
+    //XML parser to read level settings
+    XmlListModel {
+        id: xmlModelLevels
+        source: "./levels/levels.xml"
+        query: "/levels/level"
+
+        XmlRole { name: "level"; query: "numLevel/number()" }
+        XmlRole { name: "totalTime"; query: "totalTime/number()" }
+        XmlRole { name: "periodOfBalls"; query: "periodOfBalls/number()" }
+        XmlRole { name: "timePreparation"; query: "timePreparation/number()" }
+        XmlRole { name: "medpackProbability"; query: "medpackProbability/number()" }
+        XmlRole { name: "medpackHealth"; query: "medpackHealth/number()" }
+        XmlRole { name: "ballDamage"; query: "ballDamage/number()" }
+        XmlRole { name: "ballImpulse"; query: "ballImpulse/number()" }
+        XmlRole { name: "ballImpulseAdditional"; query: "ballImpulseAdditional/number()" }
+
+        onStatusChanged: {
+            if( status == XmlListModel.Error ) {
+                console.log("Error: " + errorString() )
+            }
+            if( status == XmlListModel.Ready ) {
+                initAllLevels()
+            }
+        }
+    }
+
+    function initAllLevels()
+    {
+        levelModel.clear()
+        for( var j=0; j<xmlModelLevels.count; j++ ) {
+            var key = "level"+xmlModelLevels.get(j).level
+            var stars = myLocalStorage.getValue(key)
+            levelModel.append({
+                                  "level": xmlModelLevels.get(j).level,
+                                  "totalTime": xmlModelLevels.get(j).totalTime,
+                                  "periodOfBalls": xmlModelLevels.get(j).periodOfBalls,
+                                  "timePreparation": xmlModelLevels.get(j).timePreparation,
+                                  "medpackProbability": xmlModelLevels.get(j).medpackProbability,
+                                  "medpackHealth": xmlModelLevels.get(j).medpackHealth,
+                                  "ballDamage": xmlModelLevels.get(j).ballDamage,
+                                  "ballImpulse": xmlModelLevels.get(j).ballImpulse,
+                                  "ballImpulseAdditional": xmlModelLevels.get(j).ballImpulseAdditional,
+                                  "stars": stars == undefined ? 0 : stars
+                              })
+        }
+    }
+
+    //this storages stars for each level and it's available via a key "levelN"
+    Storage {
+        id: myLocalStorage
+    }
+
+
+
     Component.onCompleted: {
-        //console.log(">>> musicIsOn: "+settings.musicIsOn)
-        //console.log(">>> soundIsOn: "+settings.soundIsOn)
+        //myLocalStorage.clearAll()
     }
 }
 

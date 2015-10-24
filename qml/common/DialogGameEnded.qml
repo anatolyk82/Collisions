@@ -56,13 +56,14 @@ MultiResolutionImage {
             imageSourcePressed: "../../assets/buttons/button_ok_yellow.png"
             onClicked: {
                 imageDialogGameEnded.close()
-                imageDialogGameEnded.restartClicked()
+                imageDialogGameEnded.nextClicked()
             }
         }
     }
 
     function open( stars ) {
         __starsTotal = stars
+        imageDialogGameEnded.source = "../../assets/dialogs/dialog_level_complete_0.png"
         imageDialogGameEnded.visible = true
         timerOfStars.start()
     }

@@ -1,0 +1,37 @@
+<levels>
+    <level>
+        <numLevel>1</numLevel>                              <!-- level number -->
+        <totalTime>20000</totalTime>                        <!-- level time in milliseconds -->
+        <periodOfBalls>15000</periodOfBalls>                <!-- peroid of ball appearance (in milliseconds) -->
+        <timePreparation>3000</timePreparation>             <!-- time of preparing to appear (in milliseconds) -->
+        <ballImpulse>100</ballImpulse>
+        <ballImpulseAdditional>100</ballImpulseAdditional>
+        <medpackProbability>50</medpackProbability>         <!-- probability of medpack appearance -->
+        <medpackHealth>20</medpackHealth>                   <!-- how much health a medpack gives -->
+        <ballDamage>20</ballDamage>                         <!-- how much damage a ball deals -->
+    </level>
+
+    <level>
+        <numLevel>2</numLevel>
+        <totalTime>30000</totalTime>
+        <periodOfBalls>12000</periodOfBalls>
+        <timePreparation>3000</timePreparation>
+        <ballImpulse>150</ballImpulse>
+        <ballImpulseAdditional>150</ballImpulseAdditional>
+        <medpackProbability>50</medpackProbability>
+        <medpackHealth>20</medpackHealth>
+        <ballDamage>20</ballDamage>
+    </level>
+
+    <level>
+        <numLevel>3</numLevel>
+        <totalTime>40000</totalTime>
+        <periodOfBalls>12000</periodOfBalls>
+        <timePreparation>3000</timePreparation>
+        <ballImpulse>100</ballImpulse>
+        <ballImpulseAdditional>100</ballImpulseAdditional>
+        <medpackProbability>50</medpackProbability>
+        <medpackHealth>20</medpackHealth>
+        <ballDamage>20</ballDamage>
+    </level>
+</levels>

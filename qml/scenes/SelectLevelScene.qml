@@ -1,5 +1,6 @@
 import VPlay 2.0
-import QtQuick 2.4
+import QtQuick 2.0
+
 import "../common"
 
 BaseScene {
@@ -82,7 +83,7 @@ BaseScene {
                         anchors.fill: parent
                         onClicked: {
                             if( !isLevelLock( index, stars ) ) {
-                                gameScene.currentLevel = level
+                                gameScene.initGame( index )
                                 app.state = "game"
                                 gameScene.start() //start the pysics world
                             }
@@ -148,72 +149,5 @@ BaseScene {
         }
     }
 
-    ListModel {
-        id: levelModel
-        ListElement {
-            level: 1
-            stars: 3
-        }
-        ListElement {
-            level: 2
-            stars: 3
-        }
-        ListElement {
-            level: 3
-            stars: 2
-        }
-        ListElement {
-            level: 4
-            stars: 3
-        }
-        ListElement {
-            level: 5
-            stars: 2
-        }
-        ListElement {
-            level: 6
-            stars: 3
-        }
-        ListElement {
-            level: 7
-            stars: 2
-        }
-        ListElement {
-            level: 8
-            stars: 1
-        }
-        ListElement {
-            level: 9
-            stars: 2
-        }
-        ListElement {
-            level: 10
-            stars: 1
-        }
-        ListElement {
-            level: 11
-            stars: 3
-        }
-        ListElement {
-            level: 12
-            stars: 2
-        }
-        ListElement {
-            level: 13
-            stars: 2
-        }
-        ListElement {
-            level: 14
-            stars: 0
-        }
-        ListElement {
-            level: 15
-            stars: 0
-        }
-        ListElement {
-            level: 16
-            stars: 0
-        }
-    }
 }
 

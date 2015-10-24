@@ -6,9 +6,21 @@ import "../game"
 BaseScene {
     id: gameScene
 
-    property int currentLevel: 0
+    /*--- level settings ---*/
+    property int levelIndex: 0  //index of this current level in the ListModel
+    property int currentLevel: 1
+    property int currentStars: 0
+    property alias totalTime: gameTimer.gameMillisecondsTotal
 
-    property bool running: false
+    property alias periodOfBalls: ballGenerator.intervalBetweenBalls
+    property alias timePreparation: ballGenerator.preparatoryInterval
+    property alias ballDamage: ballGenerator.ballDamage
+    property alias ballImpulse: ballGenerator.ballImpulse
+    property alias ballImpulseAdditional: ballGenerator.ballImpulseAdditional
+
+    property alias medpackProbability: medpackGenerator.medpackProbability
+    property alias medpackHealth: medpackGenerator.health
+
 
     property int usersBallSize: 30
 
@@ -64,6 +76,20 @@ BaseScene {
     DialogGameEnded {
         id: dialogGameEnded
         z: 12
+        onNextClicked: {
+            gameScene.stop()
+            if( levelIndex == (levelModel.count-1) ) {
+                gameScene.backButtonPressed()
+            } else {
+                levelIndex = levelIndex + 1
+                initGame( levelIndex )
+                gameScene.start()
+            }
+        }
+        onRestartClicked: {
+            gameScene.stop()
+            gameScene.start()
+        }
     }
 
     Label {
@@ -93,9 +119,23 @@ BaseScene {
 
         gameMillisecondsTotal: 30000
         onTimerIsOver: {
+            //stop the game
             buttonPause.visible = false
             gameScene.pause( true )
-            dialogGameEnded.open( grantStarsForCurrentLevel() )
+
+            //get stars for this level
+            var stars = grantStarsForCurrentLevel()
+
+            //save the result if it's better
+            var key = "level"+currentLevel
+            if( stars > gameScene.currentStars ) {
+                myLocalStorage.setValue( key, stars )
+            }
+            dialogGameEnded.open( stars )
+
+            //change the level model
+            initAllLevels()
+            //levelModel.setProperty(levelIndex, key, stars)
         }
     }
 
@@ -104,7 +144,7 @@ BaseScene {
         id: world
         gravity: Qt.point(0,0)
         running: false
-        //debugDrawVisible: false
+        debugDrawVisible: false
 
         //walls aren't visible because their edges are at appropriate edges of the screen
         Wall {
@@ -154,9 +194,8 @@ BaseScene {
 
         MedpackGenerator {
             id: medpackGenerator
-            probabilityMedpack: 60
+            medpackProbability: 60
         }
-
 
         MouseArea {
             property Body selectedBody: null
@@ -273,6 +312,22 @@ BaseScene {
         } else {
             return 3
         }
+    }
+
+
+    function initGame( index ) {
+        console.log(">>> initGame: index="+index + " level:"+levelModel.get(index).level)
+        gameScene.levelIndex = index
+        gameScene.currentLevel = levelModel.get(index).level
+        gameScene.currentStars = levelModel.get(index).stars
+        gameScene.totalTime = levelModel.get(index).totalTime
+        gameScene.periodOfBalls = levelModel.get(index).periodOfBalls
+        gameScene.timePreparation = levelModel.get(index).timePreparation
+        gameScene.medpackProbability = levelModel.get(index).medpackProbability
+        gameScene.medpackHealth = levelModel.get(index).medpackHealth
+        gameScene.ballDamage = levelModel.get(index).ballDamage
+        gameScene.ballImpulse = levelModel.get(index).ballImpulse
+        gameScene.ballImpulseAdditional = levelModel.get(index).ballImpulseAdditional
     }
 
 

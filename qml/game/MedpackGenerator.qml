@@ -3,7 +3,7 @@ import QtQuick 2.4
 Item {
     id: generator
 
-    property int probabilityMedpack: 20  //probability of generating a medpack is "probabilityMedpack" percent
+    property int medpackProbability: 20  //probability of generating a medpack is "medpackProbability" percent
     property int sizeMedpack: 30         //size of medpack
     property int health: 20              //how much health a medpack gives the user's ball
 
@@ -22,7 +22,7 @@ Item {
         interval: 5000
         onTriggered: {
             var randomValue = Math.round( utils.generateRandomValueBetween(0,100) )
-            if( (randomValue >= 0) && (randomValue <= probabilityMedpack) ) {
+            if( (randomValue >= 0) && (randomValue <= medpackProbability) ) {
                 _medpackUniqueId += 1
 
                 //for X
