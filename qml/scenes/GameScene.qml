@@ -71,10 +71,24 @@ BaseScene {
 
     HealthBar {
         id: barHealth
-        anchors.horizontalCenter: parent.horizontalCenter
+        z: 10
+        anchors.left: parent.left
+        anchors.leftMargin: 5
         anchors.bottom: parent.bottom
-        anchors.bottomMargin: 10
+        anchors.bottomMargin: 5
     }
+
+    GameTimer {
+        id: gameTimer
+        z: 10
+        anchors.right: parent.right
+        anchors.rightMargin: 5
+        anchors.bottom: parent.bottom
+        anchors.bottomMargin: 5
+        onTimerIsOver: {
+        }
+    }
+
 
     PhysicsWorld {
         id: world
@@ -195,11 +209,13 @@ BaseScene {
         //start game generators
         ballGenerator.start()
         medpackGenerator.start()
+        gameTimer.start()
         buttonPause.visible = true
     }
 
     /* this function pauses the game */
     function pause( isPaused ) {
+        gameTimer.pause( isPaused )
         if( isPaused ) {
             medpackGenerator.stop()
             ballGenerator.stop()
@@ -213,6 +229,7 @@ BaseScene {
 
     /* this function stops the game */
     function stop() {
+        gameTimer.stop()
         medpackGenerator.stop()
         ballGenerator.stop()
         //stop the physic world
