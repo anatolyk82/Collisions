@@ -10,6 +10,8 @@ EntityBase {
     property alias body: bonusCollider.body
     property alias sourceImage: imageBonus.source
 
+    signal contactWithUsersBall( string entityId )
+
     Image {
         id: imageBonus
         source: ""
@@ -33,6 +35,15 @@ EntityBase {
         friction: 0
         restitution: 1
         bodyType: Body.Dynamic
+
+        fixture.onBeginContact: {
+            var body = other.getBody();
+            var collidedEntity = body.target;
+            var collidedEntityType = collidedEntity.entityType;
+            if( collidedEntityType == "usersBallType" ) {
+                bonus.contactWithUsersBall( entityId )
+            }
+        }
     }
 
 }

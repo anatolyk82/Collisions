@@ -15,14 +15,17 @@ Item {
         timerGenerator.stop()
     }
 
+    property int _medpackUniqueId: 0   //helps to generate a medpack with a unique Id
     Timer {
         id: timerGenerator
         repeat: true
-        interval: 1000
+        interval: 5000
         onTriggered: {
             var randomValue = Math.round( utils.generateRandomValueBetween(0,100) )
             if( (randomValue >= 0) && (randomValue <= probabilityMedpack) ) {
+                _medpackUniqueId += 1
 
+                //for X
                 var packX = Math.random()*generator.parent.width
                 if( packX < 2*sizeMedpack ) {
                     packX += 2*sizeMedpack
@@ -38,10 +41,20 @@ Item {
                     packY -= 2*sizeMedpack
                 }
 
+                var medpackId = "medpackId" + _medpackUniqueId
                 entityManager.createEntityFromUrlWithProperties( Qt.resolvedUrl("MedPack.qml"),
-                                                                { x: packX, y: packY, sizeBox: sizeMedpack, health: health} )
+                              { entityId: medpackId, x: packX, y: packY, sizeBox: sizeMedpack, health: health} )
+
+                var medpackObject = entityManager.getEntityById( medpackId )
+                medpackObject.contactWithUsersBall.connect( medpackIsBeingTouchedByUser )
+
             }
         }
+    }
+
+    //this removes a medpack from the world if the medpack is touched by the user
+    function medpackIsBeingTouchedByUser( entityId ) {
+        entityManager.removeEntityById(entityId)
     }
 }
 

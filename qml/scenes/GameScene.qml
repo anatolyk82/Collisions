@@ -118,7 +118,7 @@ BaseScene {
 
         MedpackGenerator {
             id: medpackGenerator
-            probabilityMedpack: 5
+            probabilityMedpack: 60
         }
 
 
@@ -168,7 +168,7 @@ BaseScene {
     function start() {
         //create the user's ball
         entityManager.createEntityFromUrlWithProperties ( Qt.resolvedUrl("../game/UsersBall.qml"),
-                                                         { x: world.width/2, y: world.height/2, radius: usersBallSize, } )
+                      { x: (world.width/2-usersBallSize), y: (world.height/2-usersBallSize), radius: usersBallSize, } )
         //connect signals from the ball
         var usersBallObject = entityManager.getEntityById("usersBall")
         usersBallObject.onCurrentHealthChanged.connect( currentHealthChangedSlot )
