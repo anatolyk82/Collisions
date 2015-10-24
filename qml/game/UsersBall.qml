@@ -21,7 +21,21 @@ EntityBase {
 
     Image {
         id: ballImage
-        source: "../../assets/img/usersBall.png"
+        source: {
+            if( currentHealth > 85 ) {
+                "../../assets/img/usersBall.png"
+            } else if( currentHealth > 70 ) {
+                "../../assets/img/usersBall_85_70.png"
+            } else if( currentHealth > 50 ) {
+                "../../assets/img/usersBall_70_50.png"
+            } else if( currentHealth > 35 ) {
+                "../../assets/img/usersBall_50_35.png"
+            } else if( currentHealth > 20 ) {
+                "../../assets/img/usersBall_35_20.png"
+            } else {
+                "../../assets/img/usersBall_20_0.png"
+            }
+        }
         x: ballCollider.x
         y: ballCollider.y
         width: radius*2
