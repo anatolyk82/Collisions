@@ -10,6 +10,21 @@ BaseScene {
     headerText: qsTr("Levels")
 
 
+    MenuButton {
+        id: buttonHowToPlay
+        z: 2
+        anchors.top: parent.top
+        anchors.topMargin: 10
+        anchors.right: parent.right
+        anchors.rightMargin: 5
+        text: qsTr("How to play")
+        imageSource: "../../assets/buttons/button_about_blue.png"
+        imageSourcePressed: "../../assets/buttons/button_about_yellow.png"
+        onClicked: {
+        }
+    }
+
+
     MultiResolutionImage {
         id: imageBackgroundDialog
         smooth: true

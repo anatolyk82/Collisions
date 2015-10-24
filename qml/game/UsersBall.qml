@@ -5,6 +5,7 @@ EntityBase {
     id: ball
     z: 5
 
+    entityId: "usersBall"
     entityType: "usersBallType"
 
     property alias radius: ballCollider.radius
@@ -29,10 +30,10 @@ EntityBase {
 
     CircleCollider {
         id: ballCollider
-        radius: 20
+        radius: 30
         anchors.centerIn: parent
 
-        density: 0
+        density: 10
         friction: 0
         restitution: 1
         bodyType: Body.Dynamic

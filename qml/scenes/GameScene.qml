@@ -10,6 +10,8 @@ BaseScene {
 
     property bool running: false
 
+    property int usersBallSize: 30
+
     //we do not need to see the header and button text
     backText: ""
     headerText: ""
@@ -114,13 +116,6 @@ BaseScene {
             id: ballGenerator
         }
 
-        UsersBall {
-            id: usersBall
-            onCurrentHealthChanged: {
-                barHealth.value = currentHealth
-            }
-        }
-
         MedpackGenerator {
             id: medpackGenerator
             probabilityMedpack: 5
@@ -162,7 +157,7 @@ BaseScene {
     Component {
         id: mouseJoint
         MouseJoint {
-            maxForce:  100000//world.pixelsPerMetr
+            maxForce:  50000000//world.pixelsPerMetr
             dampingRatio: 0.5 //0-1
             frequencyHz: 1
         }
@@ -171,9 +166,19 @@ BaseScene {
 
     /**** manage the game scene ****/
     function start() {
+        //create the user's ball
+        entityManager.createEntityFromUrlWithProperties ( Qt.resolvedUrl("../game/UsersBall.qml"),
+                                                         { x: world.width/2, y: world.height/2, radius: usersBallSize, } )
+        //connect signals from the ball
+        var usersBallObject = entityManager.getEntityById("usersBall")
+        usersBallObject.onCurrentHealthChanged.connect( currentHealthChangedSlot )
+        //set the health bar to the maximum value
+        barHealth.value = usersBallObject.totalHealth
+        barHealth.maxValue = usersBallObject.totalHealth
+        barHealth.minValue = 0
+        //run the world
         world.running = true
-        usersBall.x = world.width/2
-        usersBall.y = world.height/2
+        //start game generators
         ballGenerator.start()
         medpackGenerator.start()
     }
@@ -196,10 +201,13 @@ BaseScene {
         //stop the physic world
         world.running = false
         //remove all balls
-        var toRemoveEntityTypes = ["ballType"];
+        var toRemoveEntityTypes = ["ballType","medpackType","usersBallType"];
         entityManager.removeEntitiesByFilter(toRemoveEntityTypes);
     }
 
+    function currentHealthChangedSlot() {
+        barHealth.value = entityManager.getEntityById("usersBall").currentHealth
+    }
 
     Component.onCompleted: {
         dialogPause.close()
