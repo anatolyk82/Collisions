@@ -17,10 +17,6 @@ EntityBase {
     property int __currentHealthPrev: totalHealth
     onCurrentHealthChanged: {
         currentHealth = currentHealth < 0 ? 0 : ((currentHealth > totalHealth) ? totalHealth : currentHealth)
-        if( currentHealth < __currentHealthPrev ) {
-            playSound("../../assets/sounds/crack.wav")
-        }
-        __currentHealthPrev = currentHealth
     }
 
     Image {
@@ -44,6 +40,12 @@ EntityBase {
         y: ballCollider.y
         width: radius*2
         height: width
+        onSourceChanged: {
+            if( currentHealth < __currentHealthPrev ) {
+                playSound("../../assets/sounds/crack.wav")
+            }
+            __currentHealthPrev = currentHealth
+        }
     }
 
     CircleCollider {
@@ -92,5 +94,6 @@ EntityBase {
             snd.play()
         }
     }
+
 }
 

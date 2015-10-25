@@ -30,8 +30,212 @@
         <timePreparation>3000</timePreparation>
         <ballImpulse>100</ballImpulse>
         <ballImpulseAdditional>100</ballImpulseAdditional>
-        <medpackProbability>50</medpackProbability>
+        <medpackProbability>40</medpackProbability>
         <medpackHealth>20</medpackHealth>
         <ballDamage>20</ballDamage>
+    </level>
+
+    <level>
+        <numLevel>4</numLevel>
+        <totalTime>30000</totalTime>
+        <periodOfBalls>20000</periodOfBalls>
+        <timePreparation>3000</timePreparation>
+        <ballImpulse>300</ballImpulse>
+        <ballImpulseAdditional>100</ballImpulseAdditional>
+        <medpackProbability>40</medpackProbability>
+        <medpackHealth>30</medpackHealth>
+        <ballDamage>40</ballDamage>
+    </level>
+
+    <level>
+        <numLevel>5</numLevel>
+        <totalTime>35000</totalTime>
+        <periodOfBalls>16000</periodOfBalls>
+        <timePreparation>3000</timePreparation>
+        <ballImpulse>300</ballImpulse>
+        <ballImpulseAdditional>100</ballImpulseAdditional>
+        <medpackProbability>30</medpackProbability>
+        <medpackHealth>20</medpackHealth>
+        <ballDamage>40</ballDamage>
+    </level>
+
+    <level>
+        <numLevel>6</numLevel>
+        <totalTime>45000</totalTime>
+        <periodOfBalls>12000</periodOfBalls>
+        <timePreparation>3000</timePreparation>
+        <ballImpulse>200</ballImpulse>
+        <ballImpulseAdditional>100</ballImpulseAdditional>
+        <medpackProbability>40</medpackProbability>
+        <medpackHealth>20</medpackHealth>
+        <ballDamage>30</ballDamage>
+    </level>
+
+    <level>
+        <numLevel>7</numLevel>
+        <totalTime>45000</totalTime>
+        <periodOfBalls>10000</periodOfBalls>
+        <timePreparation>3000</timePreparation>
+        <ballImpulse>100</ballImpulse>
+        <ballImpulseAdditional>150</ballImpulseAdditional>
+        <medpackProbability>15</medpackProbability>
+        <medpackHealth>10</medpackHealth>
+        <ballDamage>30</ballDamage>
+    </level>
+
+    <level>
+        <numLevel>8</numLevel>
+        <totalTime>40000</totalTime>
+        <periodOfBalls>10000</periodOfBalls>
+        <timePreparation>2000</timePreparation>
+        <ballImpulse>100</ballImpulse>
+        <ballImpulseAdditional>150</ballImpulseAdditional>
+        <medpackProbability>15</medpackProbability>
+        <medpackHealth>10</medpackHealth>
+        <ballDamage>20</ballDamage>
+    </level>
+
+    <level>
+        <numLevel>9</numLevel>
+        <totalTime>60000</totalTime>
+        <periodOfBalls>10000</periodOfBalls>
+        <timePreparation>2000</timePreparation>
+        <ballImpulse>100</ballImpulse>
+        <ballImpulseAdditional>150</ballImpulseAdditional>
+        <medpackProbability>15</medpackProbability>
+        <medpackHealth>10</medpackHealth>
+        <ballDamage>20</ballDamage>
+    </level>
+
+    <level>
+        <numLevel>10</numLevel>
+        <totalTime>40000</totalTime>
+        <periodOfBalls>10000</periodOfBalls>
+        <timePreparation>2000</timePreparation>
+        <ballImpulse>100</ballImpulse>
+        <ballImpulseAdditional>100</ballImpulseAdditional>
+        <medpackProbability>20</medpackProbability>
+        <medpackHealth>10</medpackHealth>
+        <ballDamage>40</ballDamage>
+    </level>
+
+    <level>
+        <numLevel>11</numLevel>
+        <totalTime>30000</totalTime>
+        <periodOfBalls>10000</periodOfBalls>
+        <timePreparation>2000</timePreparation>
+        <ballImpulse>100</ballImpulse>
+        <ballImpulseAdditional>10</ballImpulseAdditional>
+        <medpackProbability>20</medpackProbability>
+        <medpackHealth>10</medpackHealth>
+        <ballDamage>50</ballDamage>
+    </level>
+
+    <level>
+        <numLevel>12</numLevel>
+        <totalTime>30000</totalTime>
+        <periodOfBalls>20000</periodOfBalls>
+        <timePreparation>3000</timePreparation>
+        <ballImpulse>400</ballImpulse>
+        <ballImpulseAdditional>50</ballImpulseAdditional>
+        <medpackProbability>20</medpackProbability>
+        <medpackHealth>10</medpackHealth>
+        <ballDamage>40</ballDamage>
+    </level>
+
+    <level>
+        <numLevel>13</numLevel>
+        <totalTime>35000</totalTime>
+        <periodOfBalls>5000</periodOfBalls>
+        <timePreparation>3000</timePreparation>
+        <ballImpulse>200</ballImpulse>
+        <ballImpulseAdditional>10</ballImpulseAdditional>
+        <medpackProbability>20</medpackProbability>
+        <medpackHealth>20</medpackHealth>
+        <ballDamage>10</ballDamage>
+    </level>
+
+    <level>
+        <numLevel>14</numLevel>
+        <totalTime>45000</totalTime>
+        <periodOfBalls>4000</periodOfBalls>
+        <timePreparation>3000</timePreparation>
+        <ballImpulse>150</ballImpulse>
+        <ballImpulseAdditional>50</ballImpulseAdditional>
+        <medpackProbability>20</medpackProbability>
+        <medpackHealth>20</medpackHealth>
+        <ballDamage>5</ballDamage>
+    </level>
+
+    <level>
+        <numLevel>15</numLevel>
+        <totalTime>45000</totalTime>
+        <periodOfBalls>3000</periodOfBalls>
+        <timePreparation>1000</timePreparation>
+        <ballImpulse>150</ballImpulse>
+        <ballImpulseAdditional>50</ballImpulseAdditional>
+        <medpackProbability>25</medpackProbability>
+        <medpackHealth>20</medpackHealth>
+        <ballDamage>3</ballDamage>
+    </level>
+
+    <level>
+        <numLevel>16</numLevel>
+        <totalTime>30000</totalTime>
+        <periodOfBalls>2000</periodOfBalls>
+        <timePreparation>1000</timePreparation>
+        <ballImpulse>150</ballImpulse>
+        <ballImpulseAdditional>50</ballImpulseAdditional>
+        <medpackProbability>25</medpackProbability>
+        <medpackHealth>20</medpackHealth>
+        <ballDamage>1</ballDamage>
+    </level>
+
+    <level>
+        <numLevel>17</numLevel>
+        <totalTime>45000</totalTime>
+        <periodOfBalls>2000</periodOfBalls>
+        <timePreparation>1000</timePreparation>
+        <ballImpulse>150</ballImpulse>
+        <ballImpulseAdditional>50</ballImpulseAdditional>
+        <medpackProbability>25</medpackProbability>
+        <medpackHealth>20</medpackHealth>
+        <ballDamage>1</ballDamage>
+    </level>
+
+    <level>
+        <numLevel>18</numLevel>
+        <totalTime>25000</totalTime>
+        <periodOfBalls>8000</periodOfBalls>
+        <timePreparation>500</timePreparation>
+        <ballImpulse>650</ballImpulse>
+        <ballImpulseAdditional>50</ballImpulseAdditional>
+        <medpackProbability>25</medpackProbability>
+        <medpackHealth>20</medpackHealth>
+        <ballDamage>5</ballDamage>
+    </level>
+
+    <level>
+        <numLevel>19</numLevel>
+        <totalTime>40000</totalTime>
+        <periodOfBalls>8000</periodOfBalls>
+        <timePreparation>500</timePreparation>
+        <ballImpulse>600</ballImpulse>
+        <ballImpulseAdditional>50</ballImpulseAdditional>
+        <medpackProbability>70</medpackProbability>
+        <medpackHealth>30</medpackHealth>
+        <ballDamage>5</ballDamage>
+    </level>
+
+    <level>
+        <numLevel>20</numLevel>
+        <totalTime>35000</totalTime>
+        <periodOfBalls>10000</periodOfBalls>
+        <timePreparation>1000</timePreparation>
+        <ballImpulse>600</ballImpulse>
+        <ballImpulseAdditional>100</ballImpulseAdditional>
+        <medpackProbability>80</medpackProbability>
+        <medpackHealth>50</medpackHealth>
+        <ballDamage>10</ballDamage>
     </level>
 </levels>
