@@ -14,9 +14,13 @@ EntityBase {
     /* health points of the user's ball */
     property int totalHealth: 100
     property int currentHealth: totalHealth
+    property int __currentHealthPrev: totalHealth
     onCurrentHealthChanged: {
         currentHealth = currentHealth < 0 ? 0 : ((currentHealth > totalHealth) ? totalHealth : currentHealth)
-        console.log("HEALTH:"+currentHealth)
+        if( currentHealth < __currentHealthPrev ) {
+            crackSound.play()
+        }
+        __currentHealthPrev = currentHealth
     }
 
     Image {
@@ -56,13 +60,30 @@ EntityBase {
             var body = other.getBody();
             var collidedEntity = body.target;
             var collidedEntityType = collidedEntity.entityType;
-            //console.log(">>> "+collidedEntityType)
             if( collidedEntityType == "ballType" ) {
                 currentHealth -= collidedEntity.damage
+                ballSound.play()
             } else if( collidedEntityType == "medpackType" ) {
                 currentHealth += collidedEntity.health
+            } else if( collidedEntityType == "wallType" ) {
+                wallSound.play()
             }
         }
+    }
+
+    SoundEffectVPlay {
+        id: crackSound
+        source: "../../assets/sounds/crack.wav"
+    }
+
+    SoundEffectVPlay {
+        id: ballSound
+        source: "../../assets/sounds/usersBallOnBall.wav"
+    }
+
+    SoundEffectVPlay {
+        id: wallSound
+        source: "../../assets/sounds/ballOnWall.wav"
     }
 }
 

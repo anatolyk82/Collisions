@@ -1,4 +1,5 @@
 import QtQuick 2.4
+import VPlay 2.0
 
 BonusEntity {
     id: medPack
@@ -9,4 +10,13 @@ BonusEntity {
     property int health: 20
 
     sourceImage: "../../assets/img/medpack.png"
+
+    onContactWithUsersBall: {
+        medpackSound.play()
+    }
+
+    SoundEffectVPlay {
+        id: medpackSound
+        source: "../../assets/sounds/medpackTaken.wav"
+    }
 }

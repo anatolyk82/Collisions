@@ -38,6 +38,7 @@ BaseScene {
         text: ""
         imageSource: "../../assets/buttons/button_pause_blue.png"
         imageSourcePressed: "../../assets/buttons/button_pause_yellow.png"
+        soundEnabled: false
         onClicked: {
             gameScene.pause( true )
             dialogPause.open()

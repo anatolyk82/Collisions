@@ -20,7 +20,7 @@ MultiResolutionImage {
         anchors.top: parent.top
         anchors.topMargin: 10
         anchors.horizontalCenter: parent.horizontalCenter
-        text: qsTr("The game is over")
+        text: qsTr("Game over")
         color: "#f3db95"
     }
 
@@ -56,10 +56,17 @@ MultiResolutionImage {
     }
 
     function open() {
+        soundDialog.play()
         imageDialogGameOver.visible = true
     }
 
     function close() {
         imageDialogGameOver.visible = false
+    }
+
+
+    SoundEffectVPlay {
+        id: soundDialog
+        source: "../../assets/sounds/gameOver.wav"
     }
 }

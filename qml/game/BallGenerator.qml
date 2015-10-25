@@ -29,7 +29,8 @@ Item {
         generateNewPosotion()
 
         //create a partice system to show the user where a new ball will appear
-        fireParticle.running = true
+        //fireParticle.running = true
+        spriteAppearance.running = true
         //generatedParticlesId = entityManager.createEntityFromComponent( componentParticles )
         //console.log("generatedParticlesId="+generatedParticlesId)
 
@@ -40,7 +41,8 @@ Item {
     function stop() {
         timerIntervalBetweenBalls.stop()
         timerPrepareAppearance.stop()
-        fireParticle.running = false
+        //fireParticle.running = false
+        spriteAppearance.running = false
     }
 
 
@@ -67,7 +69,8 @@ Item {
         onTriggered: {
             //time to create a ball
             //remove the particle system
-            fireParticle.running = false
+            //fireParticle.running = false
+            spriteAppearance.running = false
 
             //calculate an impulse for the ball
             var angle = Math.round( Math.random()*360 )
@@ -124,6 +127,21 @@ Item {
             ballY -= 2*ballSize
         }
         //console.log("a new ball will be created at X:"+ballX+" Y:"+ballY)
+    }
+
+
+    AnimatedSpriteVPlay {
+        id: spriteAppearance
+        width: 4*generator.ballSize
+        height: 4*generator.ballSize
+        x: ballX - generator.ballSize
+        y: ballY - generator.ballSize
+        frameCount: 16
+        frameWidth: 128
+        frameHeight: 128
+        source: "../../assets/img/ballAppearance.png"
+        running: false
+        visible: running
     }
 }
 

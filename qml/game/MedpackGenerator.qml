@@ -1,4 +1,5 @@
 import QtQuick 2.4
+import VPlay 2.0
 
 Item {
     id: generator
@@ -48,6 +49,7 @@ Item {
                 var medpackObject = entityManager.getEntityById( medpackId )
                 medpackObject.contactWithUsersBall.connect( medpackIsBeingTouchedByUser )
 
+                medpackSound.play()
             }
         }
     }
@@ -55,6 +57,11 @@ Item {
     //this removes a medpack from the world if the medpack is touched by the user
     function medpackIsBeingTouchedByUser( entityId ) {
         entityManager.removeEntityById(entityId)
+    }
+
+    SoundEffectVPlay {
+        id: medpackSound
+        source: "../../assets/sounds/medpackAppeared.wav"
     }
 }
 

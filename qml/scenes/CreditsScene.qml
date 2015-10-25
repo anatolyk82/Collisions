@@ -12,6 +12,7 @@ BaseScene {
         anchors.left: parent.left
         anchors.right: parent.right
         anchors.bottom: parent.bottom
+        anchors.bottomMargin: 5
         anchors.top: header.bottom
         anchors.topMargin: 10
 
@@ -27,7 +28,7 @@ BaseScene {
             id: itemContent
             anchors.horizontalCenter: parent.horizontalCenter
             width: creditsScene.width
-            height: lblProgramming.height+lblSounds.height+lblArt.height+lblFont.height+lblPowered.height+lblVPlay.height+5*10
+            height: lblProgramming.height+lblMusic.height+lblSounds.height+lblArt.height+lblFont.height+lblPowered.height+lblVPlay.height+6*10+100
             Label {
                 id: lblProgramming
                 anchors.horizontalCenter: parent.horizontalCenter
@@ -36,11 +37,18 @@ BaseScene {
                 text: qsTr("Programming") + ": Anatoly Kozlov"
             }
             Label {
-                id: lblSounds
+                id: lblMusic
                 anchors.horizontalCenter: parent.horizontalCenter
                 anchors.top: lblProgramming.bottom
                 anchors.topMargin: 12
                 text: qsTr("Music") + ": <a href='http://soundimage.org'>http://soundimage.org</a>"
+            }
+            Label {
+                id: lblSounds
+                anchors.horizontalCenter: parent.horizontalCenter
+                anchors.top: lblMusic.bottom
+                anchors.topMargin: 12
+                text: qsTr("Sounds") + ": <a href='http://www.freesound.org'>http://www.freesound.org</a>"
             }
             Label {
                 id: lblArt

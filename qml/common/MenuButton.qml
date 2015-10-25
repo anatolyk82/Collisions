@@ -32,6 +32,8 @@ Rectangle {
     //size of text
     property alias textSize: buttonText.font.pixelSize
 
+    property bool soundEnabled: true
+
 
     MultiResolutionImage {
         id: imageButton
@@ -59,6 +61,7 @@ Rectangle {
         anchors.fill: parent
         //hoverEnabled: true
         onClicked: {
+            if(soundEnabled) buttonSound.play()
             if( button.checkable ) {
                 button.checked = !button.checked
             }
@@ -66,6 +69,11 @@ Rectangle {
         }
         //onEntered: {}
         //onExited: {}
+    }
+
+    SoundEffectVPlay {
+        id: buttonSound
+        source: "../../assets/sounds/button.wav"
     }
 }
 

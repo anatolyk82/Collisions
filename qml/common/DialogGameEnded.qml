@@ -82,15 +82,32 @@ MultiResolutionImage {
             __starsCurrent += 1
             if( __starsCurrent == 1 ) {
                 imageDialogGameEnded.source = "../../assets/dialogs/dialog_level_complete_1.png"
+                starSound1.play()
             } else if( __starsCurrent == 2 ) {
                 imageDialogGameEnded.source = "../../assets/dialogs/dialog_level_complete_2.png"
+                starSound2.play()
             } else if( __starsCurrent == 3 ) {
                 imageDialogGameEnded.source = "../../assets/dialogs/dialog_level_complete_3.png"
+                starSound3.play()
             }
 
             if( __starsCurrent != __starsTotal) {
                 timerOfStars.start()
             }
         }
+    }
+
+
+    SoundEffectVPlay {
+        id: starSound1
+        source: "../../assets/sounds/star.wav"
+    }
+    SoundEffectVPlay {
+        id: starSound2
+        source: "../../assets/sounds/star.wav"
+    }
+    SoundEffectVPlay {
+        id: starSound3
+        source: "../../assets/sounds/star.wav"
     }
 }

@@ -55,10 +55,12 @@ MultiResolutionImage {
             text: qsTr("Resume")
             imageSource: "../../assets/buttons/button_ok_blue.png"
             imageSourcePressed: "../../assets/buttons/button_ok_yellow.png"
+            soundEnabled: false
             onClicked: {
                 imageDialogPause.close()
                 //continue the game
                 imageDialogPause.resumeClicked()
+                soundUnpause.play()
             }
         }
         MenuButton {
@@ -77,11 +79,21 @@ MultiResolutionImage {
     }
 
     function open() {
+        soundPause.play()
         imageDialogPause.visible = true
     }
 
     function close() {
         imageDialogPause.visible = false
+    }
+
+    SoundEffectVPlay {
+        id: soundPause
+        source: "../../assets/sounds/pause.wav"
+    }
+    SoundEffectVPlay {
+        id: soundUnpause
+        source: "../../assets/sounds/unpause.wav"
     }
 }
 

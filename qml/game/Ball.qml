@@ -26,7 +26,12 @@ EntityBase {
         bodyType: Body.Dynamic
 
         fixture.onBeginContact: {
-            //console.log("Collision")
+            var body = other.getBody();
+            var collidedEntity = body.target;
+            var collidedEntityType = collidedEntity.entityType;
+            if( collidedEntityType == "wallType" ) {
+                ballSound.play()
+            }
         }
     }
 
@@ -47,6 +52,11 @@ EntityBase {
     function pushBall() {
         var localForwardVector = ballCollider.body.toWorldVector(Qt.point(ball.impulseX,ball.impulseY));
         ballCollider.body.applyLinearImpulse( localForwardVector, ballCollider.body.getWorldCenter() );
+    }
+
+    SoundEffectVPlay {
+        id: ballSound
+        source: "../../assets/sounds/ballOnWall.wav"
     }
 
     Component.onCompleted: {
