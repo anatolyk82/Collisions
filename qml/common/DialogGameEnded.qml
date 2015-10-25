@@ -62,6 +62,7 @@ MultiResolutionImage {
     }
 
     function open( stars ) {
+        playSound("../../assets/sounds/gameDone.wav")
         __starsTotal = stars
         imageDialogGameEnded.source = "../../assets/dialogs/dialog_level_complete_0.png"
         imageDialogGameEnded.visible = true
@@ -82,13 +83,13 @@ MultiResolutionImage {
             __starsCurrent += 1
             if( __starsCurrent == 1 ) {
                 imageDialogGameEnded.source = "../../assets/dialogs/dialog_level_complete_1.png"
-                starSound1.play()
+                playSound("../../assets/sounds/star.wav")
             } else if( __starsCurrent == 2 ) {
                 imageDialogGameEnded.source = "../../assets/dialogs/dialog_level_complete_2.png"
-                starSound2.play()
+                playSound("../../assets/sounds/star.wav")
             } else if( __starsCurrent == 3 ) {
                 imageDialogGameEnded.source = "../../assets/dialogs/dialog_level_complete_3.png"
-                starSound3.play()
+                playSound("../../assets/sounds/star.wav")
             }
 
             if( __starsCurrent != __starsTotal) {
@@ -98,16 +99,24 @@ MultiResolutionImage {
     }
 
 
-    SoundEffectVPlay {
-        id: starSound1
-        source: "../../assets/sounds/star.wav"
+    Component {
+        id: componentSounds
+        SoundEffectVPlay {
+            id: soundEffect
+            onPlayingChanged: {
+                if( playing == false ) {
+                    soundEffect.destroy()
+                }
+            }
+        }
     }
-    SoundEffectVPlay {
-        id: starSound2
-        source: "../../assets/sounds/star.wav"
-    }
-    SoundEffectVPlay {
-        id: starSound3
-        source: "../../assets/sounds/star.wav"
+
+    function playSound( file ) {
+        var snd = componentSounds.createObject(imageDialogGameEnded, {"source": file});
+        if (snd == null) {
+            console.log("Error creating sound");
+        } else {
+            snd.play()
+        }
     }
 }

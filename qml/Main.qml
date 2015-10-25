@@ -179,9 +179,16 @@ GameWindow {
     }
 
 
+    BackgroundMusic {
+        id: backgroundMusic
+        source: app.state == "game" ? "../assets/music/WhimsicalPopsicle.mp3" : "../assets/music/InsertQuarter.mp3"
+        volume: 0.25
+    }
+
 
     Component.onCompleted: {
         //myLocalStorage.clearAll()
     }
 }
+
 
