@@ -30,7 +30,7 @@ EntityBase {
             var collidedEntity = body.target;
             var collidedEntityType = collidedEntity.entityType;
             if( collidedEntityType == "wallType" ) {
-                ballSound.play()
+                playSound("../../assets/sounds/ballOnWall.wav")
             }
         }
     }
@@ -54,9 +54,26 @@ EntityBase {
         ballCollider.body.applyLinearImpulse( localForwardVector, ballCollider.body.getWorldCenter() );
     }
 
-    SoundEffectVPlay {
-        id: ballSound
-        source: "../../assets/sounds/ballOnWall.wav"
+
+    Component {
+        id: componentSounds
+        SoundEffectVPlay {
+            id: soundEffect
+            onPlayingChanged: {
+                if( playing == false ) {
+                    soundEffect.destroy()
+                }
+            }
+        }
+    }
+
+    function playSound( file ) {
+        var snd = componentSounds.createObject(ball, {"source": file});
+        if (snd == null) {
+            console.log("Error creating sound");
+        } else {
+            snd.play()
+        }
     }
 
     Component.onCompleted: {

@@ -18,7 +18,7 @@ EntityBase {
     onCurrentHealthChanged: {
         currentHealth = currentHealth < 0 ? 0 : ((currentHealth > totalHealth) ? totalHealth : currentHealth)
         if( currentHealth < __currentHealthPrev ) {
-            crackSound.play()
+            playSound("../../assets/sounds/crack.wav")
         }
         __currentHealthPrev = currentHealth
     }
@@ -62,28 +62,35 @@ EntityBase {
             var collidedEntityType = collidedEntity.entityType;
             if( collidedEntityType == "ballType" ) {
                 currentHealth -= collidedEntity.damage
-                ballSound.play()
+                playSound("../../assets/sounds/usersBallOnBall.wav")
             } else if( collidedEntityType == "medpackType" ) {
                 currentHealth += collidedEntity.health
+                playSound("../../assets/sounds/medpackTaken.wav")
             } else if( collidedEntityType == "wallType" ) {
-                wallSound.play()
+                playSound("../../assets/sounds/ballOnWall.wav")
             }
         }
     }
 
-    SoundEffectVPlay {
-        id: crackSound
-        source: "../../assets/sounds/crack.wav"
+    Component {
+        id: componentSounds
+        SoundEffectVPlay {
+            id: soundEffect
+            onPlayingChanged: {
+                if( playing == false ) {
+                    soundEffect.destroy()
+                }
+            }
+        }
     }
 
-    SoundEffectVPlay {
-        id: ballSound
-        source: "../../assets/sounds/usersBallOnBall.wav"
-    }
-
-    SoundEffectVPlay {
-        id: wallSound
-        source: "../../assets/sounds/ballOnWall.wav"
+    function playSound( file ) {
+        var snd = componentSounds.createObject(ball, {"source": file});
+        if (snd == null) {
+            console.log("Error creating sound");
+        } else {
+            snd.play()
+        }
     }
 }
 

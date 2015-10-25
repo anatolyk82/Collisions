@@ -10,13 +10,4 @@ BonusEntity {
     property int health: 20
 
     sourceImage: "../../assets/img/medpack.png"
-
-    onContactWithUsersBall: {
-        medpackSound.play()
-    }
-
-    SoundEffectVPlay {
-        id: medpackSound
-        source: "../../assets/sounds/medpackTaken.wav"
-    }
 }

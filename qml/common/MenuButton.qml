@@ -61,7 +61,7 @@ Rectangle {
         anchors.fill: parent
         //hoverEnabled: true
         onClicked: {
-            if(soundEnabled) buttonSound.play()
+            playSound("../../assets/sounds/button.wav")
             if( button.checkable ) {
                 button.checked = !button.checked
             }
@@ -71,9 +71,26 @@ Rectangle {
         //onExited: {}
     }
 
-    SoundEffectVPlay {
-        id: buttonSound
-        source: "../../assets/sounds/button.wav"
+
+    Component {
+        id: componentSounds
+        SoundEffectVPlay {
+            id: soundEffect
+            onPlayingChanged: {
+                if( playing == false ) {
+                    soundEffect.destroy()
+                }
+            }
+        }
+    }
+
+    function playSound( file ) {
+        var snd = componentSounds.createObject(button, {"source": file});
+        if (snd == null) {
+            console.log("Error creating sound");
+        } else {
+            snd.play()
+        }
     }
 }
 
