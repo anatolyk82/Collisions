@@ -22,8 +22,8 @@ Item {
         repeat: true
         interval: 5000
         onTriggered: {
-            var randomValue = Math.round( utils.generateRandomValueBetween(0,100) )
-            if( (randomValue >= 0) && (randomValue <= medpackProbability) ) {
+            var randomValue = Math.round( utils.generateRandomValueBetween(1,100) )
+            if( (randomValue > 0) && (randomValue <= medpackProbability) ) {
                 _medpackUniqueId += 1
 
                 //for X

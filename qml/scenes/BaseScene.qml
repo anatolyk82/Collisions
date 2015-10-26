@@ -28,10 +28,10 @@ Scene {
     property alias backText: buttonBack.text
     property alias buttonBack: buttonBack
 
-    property alias imageBackground: imageBackground.source
+    property alias backgroundImage: backgroundImage.source
 
-    property alias headerText: labelLogo.text
-    property alias header: labelLogo
+    property alias headerText: labelHeader.text
+    property alias header: labelHeader
 
 
     //the back button
@@ -50,8 +50,8 @@ Scene {
 
 
     //background image
-    MultiResolutionImage {
-        id: imageBackground
+    BackgroundImage {
+        id: backgroundImage
         smooth: true
         antialiasing: true
         anchors.fill: parent.gameWindowAnchorItem
@@ -60,7 +60,7 @@ Scene {
 
     // the header
     Label {
-        id: labelLogo
+        id: labelHeader
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.top: parent.top
         anchors.topMargin: 18

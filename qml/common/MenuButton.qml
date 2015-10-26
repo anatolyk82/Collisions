@@ -4,10 +4,11 @@ import VPlay 2.0
 Rectangle {
     id: button
 
-    width: imageButton.width + buttonText.width
-    height: 36
+    width: imageButton.width + buttonText.width + 40
+    height: 40
 
     color: "transparent"
+    //border.color: "gray"
 
     // access the text of the Text component
     property alias text: buttonText.text
@@ -34,6 +35,7 @@ Rectangle {
 
     property bool soundEnabled: true
 
+    clip: true
 
     MultiResolutionImage {
         id: imageButton

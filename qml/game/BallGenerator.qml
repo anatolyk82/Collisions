@@ -28,11 +28,7 @@ Item {
         //fix a new position of a future ball
         generateNewPosotion()
 
-        //create a partice system to show the user where a new ball will appear
-        //fireParticle.running = true
         spriteAppearance.running = true
-        //generatedParticlesId = entityManager.createEntityFromComponent( componentParticles )
-        //console.log("generatedParticlesId="+generatedParticlesId)
 
         //start counting of the preparatory interval
         timerPrepareAppearance.start()
@@ -41,24 +37,9 @@ Item {
     function stop() {
         timerIntervalBetweenBalls.stop()
         timerPrepareAppearance.stop()
-        //fireParticle.running = false
         spriteAppearance.running = false
     }
 
-
-    ParticleVPlay {
-        id: fireParticle
-
-        // Particle location properties
-        x: ballX + generator.ballSize
-        y: ballY + generator.ballSize
-        rotation: 90
-
-        // particle file
-        fileName: "../game/zzza.json"
-
-        running: false
-    }
 
     Timer {
         id: timerPrepareAppearance
@@ -69,7 +50,6 @@ Item {
         onTriggered: {
             //time to create a ball
             //remove the particle system
-            //fireParticle.running = false
             spriteAppearance.running = false
 
             //calculate an impulse for the ball

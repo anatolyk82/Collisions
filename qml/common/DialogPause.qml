@@ -20,11 +20,11 @@ MultiResolutionImage {
     Column {
         spacing: 5
         anchors.centerIn: parent
-        anchors.horizontalCenterOffset: -10
         anchors.verticalCenterOffset: 16
         Row {
             anchors.horizontalCenter: parent.horizontalCenter
-            spacing: 30
+            anchors.horizontalCenterOffset: 15
+            //spacing: 30
             MenuButton {
                 id: buttonMusic
                 checkable: true
@@ -51,7 +51,7 @@ MultiResolutionImage {
         MenuButton {
             id: buttonResume
             z: 2
-            anchors.horizontalCenter: parent.horizontalCenter
+            //anchors.horizontalCenter: parent.horizontalCenter
             text: qsTr("Resume")
             imageSource: "../../assets/buttons/button_ok_blue.png"
             imageSourcePressed: "../../assets/buttons/button_ok_yellow.png"
@@ -66,7 +66,7 @@ MultiResolutionImage {
         MenuButton {
             id: buttonRestart
             z: 2
-            anchors.horizontalCenter: parent.horizontalCenter
+            //anchors.horizontalCenter: parent.horizontalCenter
             text: qsTr("Restart")
             imageSource: "../../assets/buttons/button_restart_blue.png"
             imageSourcePressed: "../../assets/buttons/button_restart_yellow.png"

@@ -19,9 +19,9 @@ BaseScene {
         anchors.topMargin: 10
         anchors.right: parent.right
         anchors.rightMargin: 10
-        text: howToPlayVisible ? qsTr("Back to levels") : qsTr("How to play")
-        imageSource: "../../assets/buttons/button_about_blue.png"
-        imageSourcePressed: "../../assets/buttons/button_about_yellow.png"
+        text: howToPlayVisible ? qsTr("Levels") : qsTr("Help")
+        imageSource: howToPlayVisible ? "../../assets/buttons/button_grid_blue.png" : "../../assets/buttons/button_about_blue.png"
+        imageSourcePressed: howToPlayVisible ? "../../assets/buttons/button_grid_yellow.png" : "../../assets/buttons/button_about_yellow.png"
         onClicked: {
             howToPlayVisible = !howToPlayVisible
         }

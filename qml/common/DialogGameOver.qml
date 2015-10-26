@@ -35,8 +35,8 @@ MultiResolutionImage {
             id: buttonResume
             z: 2
             text: qsTr("Menu")
-            imageSource: "../../assets/buttons/button_menu_blue.png"
-            imageSourcePressed: "../../assets/buttons/button_menu_yellow.png"
+            imageSource: "../../assets/buttons/button_grid_blue.png"
+            imageSourcePressed: "../../assets/buttons/button_grid_yellow.png"
             onClicked: {
                 imageDialogGameOver.close()
                 imageDialogGameOver.menuClicked()

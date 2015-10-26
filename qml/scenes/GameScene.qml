@@ -28,13 +28,17 @@ BaseScene {
     backText: ""
     headerText: ""
 
+    buttonBack.imageSource: "../../assets/buttons/button_grid_blue.png"
+    buttonBack.imageSourcePressed: "../../assets/buttons/button_grid_yellow.png"
+
     MenuButton {
         id: buttonPause
         z: 2
         anchors.top: parent.top
         anchors.topMargin: 10
         anchors.right: parent.right
-        anchors.rightMargin: 5
+        anchors.rightMargin: 10
+        width: height
         text: ""
         imageSource: "../../assets/buttons/button_pause_blue.png"
         imageSourcePressed: "../../assets/buttons/button_pause_yellow.png"
