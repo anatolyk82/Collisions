@@ -47,5 +47,6 @@ DISTFILES += \
     qml/game/GameTimer.qml \
     qml/common/DialogGameEnded.qml \
     doc/collisions.qdocconf \
-    doc/mainpage.qdoc
+    doc/mainpage.qdoc \
+    doc/css/online.css
 
