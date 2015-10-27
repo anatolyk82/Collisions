@@ -62,6 +62,8 @@ MultiResolutionImage {
     }
 
     function open( stars ) {
+        buttonRestart.enabled = false
+        buttonNext.enabled = false
         playSound("../../assets/sounds/gameDone.wav")
         __starsTotal = stars
         imageDialogGameEnded.source = "../../assets/dialogs/dialog_level_complete_0.png"
@@ -94,6 +96,9 @@ MultiResolutionImage {
 
             if( __starsCurrent != __starsTotal) {
                 timerOfStars.start()
+            } else {
+                buttonRestart.enabled = true
+                buttonNext.enabled = true
             }
         }
     }

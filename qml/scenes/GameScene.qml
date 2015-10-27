@@ -52,6 +52,7 @@ BaseScene {
     onBackButtonPressed: {
         gameScene.stop()
         dialogPause.close()
+        dialogGameOver.close()
     }
 
     DialogPause {
