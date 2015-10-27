@@ -2,15 +2,40 @@ import QtQuick 2.4
 import VPlay 2.0
 import "../common"
 
+/*!
+  \qmltype MenuScene
+  \inherits BaseScene
+  \brief This scene shows the main menu of the game.
+*/
+
 BaseScene {
     id: menuScene
 
     headerText: qsTr("Collisions")
 
     // signals that indicating that the an item menu had been selected
+    /*!
+      \qmlsignal void MenuScene::selectLevelPressed()
+      \brief It is emitted when the user selects "Game". {SelectLevelScene} becomes active.
+     */
     signal selectLevelPressed
+
+    /*!
+      \qmlsignal void MenuScene::settingsPressed()
+      \brief It is emitted when the user selects "Settings". {SettingsScene} becomes active.
+     */
     signal settingsPressed
+
+    /*!
+      \qmlsignal void MenuScene::creditsPressed()
+      \brief It is emitted when the user selects "Credits". {CreditScene} becomes active.
+     */
     signal creditsPressed
+
+    /*!
+      \qmlsignal void MenuScene::quitPressed()
+      \brief It is emitted when the user selects "Quit".
+     */
     signal quitPressed
 
     //do not need to see the back button here

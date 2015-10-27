@@ -1,6 +1,12 @@
 import QtQuick 2.4
 import "../common"
 
+/*!
+  \qmltype SettingsScene
+  \inherits BaseScene
+  \brief This scene shows game settings.
+*/
+
 BaseScene {
     id: settingsScene
 

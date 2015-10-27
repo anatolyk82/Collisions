@@ -5,7 +5,14 @@ project = Collisions
 description = Collisions is a small game powered by V-Play engine
 sourcedirs = . ../qml
 
-outputdir = ./html
+sources.fileextensions = "*.qml *qdoc"
+
+outputdir = /home/tolik/Projects/QML/Collisions/generatedDocs #./html
 outputformats = HTML
 outputencoding = UTF-8
 
+include($QT_INSTALL_DOCS/global/macros.qdocconf)
+include($QT_INSTALL_DOCS/global/qt-cpp-defines.qdocconf)
+include($QT_INSTALL_DOCS/global/compat.qdocconf)
+include($QT_INSTALL_DOCS/global/fileextensions.qdocconf)
+include($QT_INSTALL_DOCS/global/qt-html-templates-offline.qdocconf)

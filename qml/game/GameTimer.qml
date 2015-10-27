@@ -1,22 +1,52 @@
 import QtQuick 2.4
 import "../common"
 
+/*!
+  \qmltype GameTimer
+  \inherits Item
+  \brief A graphic object on the game scene which shows time for the current level.
+*/
+
 
 Item {
     id: gameTimer
+
+    /*!
+      \qmlproperty int GameTimer::gameMillisecondsTotal
+      \brief The total amount of seconds which the timer has to count down
+     */
     property int gameMillisecondsTotal: 30000
+
+    /*!
+      \qmlproperty int GameTimer::gameMillisecondsCurrent
+      \brief The current amount of seconds which are left to count down.
+     */
     property int gameMillisecondsCurrent: gameMillisecondsTotal
 
     width: 90
     height: 30
 
+    /*!
+      \qmlmethod void GameTimer::stop()
+      It stops the game timer
+     */
     function stop() {
         timer.stop()
     }
+
+    /*!
+      \qmlmethod void GameTimer::start()
+      It starts the game timer
+     */
     function start() {
         gameMillisecondsCurrent = gameMillisecondsTotal
         timer.start()
     }
+
+    /*!
+      \qmlmethod void GameTimer::pause()
+      It pauses the game timer
+     */
     function pause( isPaused ) {
         if( isPaused ) {
             timer.stop()
@@ -25,6 +55,10 @@ Item {
         }
     }
 
+    /*!
+      \qmlsignal void GameTimer::timerIsOver()
+      It is emitted when the countdown is finished. It means when \a gameMillisecondsCurrent is zero.
+     */
     signal timerIsOver()
 
     Image {
@@ -71,8 +105,15 @@ Item {
     }
 
 
-    function formatTime( s ) {
+    /*!
+      \qmlmethod string GameTimer::formatTime( milliseconds )
+      It converts \a milliseconds to a formatted string such as MM:SS.MS
+     */
+    function formatTime( milliseconds ) {
 
+        /*!
+          \qmlmethod string GameTimer::addZ( n )
+         */
         function addZ(n) { return (n<10? '0':'') + n; }
 
         var ms = s % 1000;

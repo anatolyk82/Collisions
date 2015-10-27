@@ -2,10 +2,11 @@ import VPlay 2.0
 import QtQuick 2.0
 import "../common"
 
-/*
- * This is the main scene for all scenes in the game
- */
-
+/*!
+  \qmltype Main
+  \inherits GameWindow
+  \brief This is the main scene for all scenes in the game
+*/
 
 Scene {
     id: baseScene
@@ -25,12 +26,34 @@ Scene {
 
 
     /* properties for configuration of the scene page */
+    /*!
+      \qmlproperty string BaseScene::backText
+      \brief This property holds the text of the back button on each scene.
+     */
     property alias backText: buttonBack.text
+
+    /*!
+      \qmlproperty MenuButton BaseScene::buttonBack
+      \brief The back button with availability of all properties.
+     */
     property alias buttonBack: buttonBack
 
+    /*!
+      \qmlproperty url BaseScene::backgroundImage
+      \brief The source of the background image.
+     */
     property alias backgroundImage: backgroundImage.source
 
+    /*!
+      \qmlproperty string BaseScene::headerText
+      \brief This property hold the text of the page header.
+     */
     property alias headerText: labelHeader.text
+
+    /*!
+      \qmlproperty Label BaseScene::labelHeader
+      \brief The page header.
+     */
     property alias header: labelHeader
 
 

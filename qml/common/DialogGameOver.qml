@@ -1,6 +1,11 @@
 import QtQuick 2.4
 import VPlay 2.0
 
+/*!
+  \qmltype DialogGameOver
+  \inherits MultiResolutionImage
+  \brief This dialog is shown when the user loses the game.
+*/
 
 MultiResolutionImage {
     id: imageDialogGameOver
@@ -13,7 +18,16 @@ MultiResolutionImage {
     height: parent.height*0.5
     width: parent.width*0.4
 
+    /*!
+      \qmlsignal DialogGameOver::menuClicked
+      \brief This signal is emitted when the button "Menu" is clicked.
+     */
     signal menuClicked()
+
+    /*!
+      \qmlsignal DialogGameOver::restartClicked
+      \brief This signal is emitted when the button "Restart" is clicked.
+     */
     signal restartClicked()
 
     Label {
@@ -55,11 +69,21 @@ MultiResolutionImage {
         }
     }
 
+    /*!
+      \qmlmethod void DialogGameOver::open()
+
+      It shows the dialog to the user.
+     */
     function open() {
         soundDialog.play()
         imageDialogGameOver.visible = true
     }
 
+    /*!
+      \qmlmethod void DialogGameOver::close()
+
+      It closes the dialog.
+     */
     function close() {
         imageDialogGameOver.visible = false
     }

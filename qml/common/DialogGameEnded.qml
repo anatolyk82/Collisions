@@ -1,6 +1,11 @@
 import QtQuick 2.4
 import VPlay 2.0
 
+/*!
+  \qmltype DialogGameEnded
+  \inherits MultiResolutionImage
+  \brief This dialog is shown when the user wins the game.
+*/
 
 MultiResolutionImage {
     id: imageDialogGameEnded
@@ -16,9 +21,22 @@ MultiResolutionImage {
     height: parent.height*0.75
     width: parent.width*0.4
 
-    //these let the game know which button was pressed
+    /*!
+      \qmlsignal DialogGameEnded::menuClicked
+      \brief This signal is emitted when the button "Menu" is clicked.
+     */
     signal menuClicked()
+
+    /*!
+      \qmlsignal DialogGameEnded::restartClicked
+      \brief This signal is emitted when the button "Restart" is clicked.
+     */
     signal restartClicked()
+
+    /*!
+      \qmlsignal DialogGameEnded::nextClicked
+      \brief This signal is emitted when the button "Next" is clicked.
+     */
     signal nextClicked()
 
     Label {
@@ -61,6 +79,11 @@ MultiResolutionImage {
         }
     }
 
+    /*!
+      \qmlmethod void DialogGameEnded::open( int stars )
+
+      It shows the dialog to the user with \a stars
+     */
     function open( stars ) {
         buttonRestart.enabled = false
         buttonNext.enabled = false
@@ -71,6 +94,11 @@ MultiResolutionImage {
         timerOfStars.start()
     }
 
+    /*!
+      \qmlmethod void DialogGameEnded::close()
+
+      It closes the dialog.
+     */
     function close() {
         __starsCurrent = 0
         imageDialogGameEnded.visible = false
@@ -116,6 +144,11 @@ MultiResolutionImage {
         }
     }
 
+    /*!
+      \qmlmethod void DialogGameEnded::playSound( url file )
+
+      It plays sounds for the dialod
+     */
     function playSound( file ) {
         var snd = componentSounds.createObject(imageDialogGameEnded, {"source": file});
         if (snd == null) {

@@ -2,6 +2,13 @@ import QtQuick 2.0
 import VPlay 2.0
 import "../common"
 
+
+/*!
+  \qmltype CreditScene
+  \inherits BaseScene
+  \brief This scene shows information about the game.
+*/
+
 BaseScene {
     id:creditsScene
 

@@ -1,11 +1,15 @@
 import VPlay 2.0
 import QtQuick 2.4
 
+/*!
+  \qmltype Wall
+  \inherits EntityBase
+  \brief A physics object on the game scene represented as a wall.
+*/
+
 
 EntityBase {
     id: wall
-
-    property alias wallColor: boxImage.color
 
     entityType: "wallType"
 

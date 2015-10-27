@@ -1,6 +1,13 @@
 import VPlay 2.0
 import QtQuick 2.5
 
+/*!
+  \qmltype UsersBall
+  \inherits EntityBase
+  \brief A physics object on the game scene represented as a ball. The main characted of the game.
+*/
+
+
 EntityBase {
     id: ball
     z: 5
@@ -8,12 +15,36 @@ EntityBase {
     entityId: "usersBall"
     entityType: "usersBallType"
 
+    /*!
+      \qmlproperty int UsersBall::radius
+      \brief The radius of the ball.
+     */
     property alias radius: ballCollider.radius
+
+    /*!
+      \qmlproperty alias UsersBall::body
+      \brief This property alias allows access to the physics Body of the ball.
+     */
     property alias body: ballCollider.body
 
-    /* health points of the user's ball */
+    /*!
+      \qmlproperty int UsersBall::totalHealth
+      \brief This property holds the maximum value of health points the user's ball has.
+      The default value is 100
+     */
     property int totalHealth: 100
+
+    /*!
+      \qmlproperty int UsersBall::currentHealth
+      \brief This property holds how many health points the user's ball has.
+      The default value is \a totalHealth
+     */
     property int currentHealth: totalHealth
+
+
+    /*!
+      \qmlproperty int UsersBall::__currentHealthPrev
+     */
     property int __currentHealthPrev: totalHealth
     onCurrentHealthChanged: {
         currentHealth = currentHealth < 0 ? 0 : ((currentHealth > totalHealth) ? totalHealth : currentHealth)
@@ -86,6 +117,11 @@ EntityBase {
         }
     }
 
+    /*!
+      \qmlmethod void UsersBall::playSound( url file )
+
+      It plays sounds for the the user's ball
+     */
     function playSound( file ) {
         var snd = componentSounds.createObject(ball, {"source": file});
         if (snd == null) {

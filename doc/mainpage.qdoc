@@ -1,9 +1,9 @@
 /*!
-\page indexx.html overview
+\page index.html overview
 \title Collisions
 
 
-This is an example of game which is made with V-Plat engine. The source code of the game is available on \l {https://github.com/anatolyk82/Collisions} {GigHub}. The main idea of the game is that the user has his own ball and he needs to move it over the game field to avoid collisions with other balls which appear during the game. The game has several levels and depending how the user finishes a level he gets a  certain amount of stars for it.
+This is an example of game which is made with {V-Play} {http://v-play.net} engine. The source code of the game is available on \l {https://github.com/anatolyk82/Collisions} {GigHub}. The main idea of the game is that the user has his own ball and he needs to move it over the game field to avoid collisions with other balls which appear during the game. The game has several levels and depending how the user finishes a level he gets a  certain amount of stars for it.
 
 \section1 Assets
 All assets, which we need for the game, were taken from open resources such as
@@ -28,5 +28,25 @@ Content:
  \li Levels
 \endlist
 
+Game types:
+\section1
+\list
+ \li \l {Main} : The main game window
+ \li \l {BaseScene} : The main scene of all game scenes
+ \li \l {SettingsScene}
+ \li \l {CreditsScene}
+ \li \l {MenuScene}
+ \li \l {Label}
+ \li \l {MenuButton}
+ \li \l {DialogPause}
+ \li \l {DialogGameOver}
+ \li \l {DialogGameEnded}
+ \li \l {Ball}
+ \li \l {UsersBall}
+ \li \l {Wall}
+ \li \l {MedPack}
+ \li \l {BonusEntity}
+ \li \l {GameTimer}
+\endlist
 
 */

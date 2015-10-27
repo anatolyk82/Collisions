@@ -1,15 +1,29 @@
 import VPlay 2.0
 import QtQuick 2.0
-
 import "../common"
+
+/*!
+  \qmltype SelectLevelScene
+  \inherits BaseScene
+  \brief This scene shows all available levels.
+*/
+
 
 BaseScene {
     id: selectLevelScene
 
+    /*!
+      \qmlsignal void SelectLevelScene::levelPressed()
+      \brief It is emitted when the user selects a level.
+     */
     signal levelPressed()
 
     headerText: qsTr("Levels")
 
+    /*!
+      \qmlproperty int SelectLevelScene::howToPlayVisible
+      \brief If this property is true, the scene shows a description how to play the game instead levels.
+     */
     property bool howToPlayVisible: false
 
     MenuButton {
@@ -132,6 +146,11 @@ BaseScene {
         }
     }
 
+    /*!
+      \qmlmethod bool SelectLevelScene::isLevelLocked( index, stars )
+
+      It returns true if a level with \a index is available, otherwise false.
+     */
     function isLevelLocked( index, stars ) {
         if( index == 0 ) {
             return false

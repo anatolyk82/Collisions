@@ -1,7 +1,11 @@
 import QtQuick 2.4
 import VPlay 2.0
 
-
+/*!
+  \qmltype DialogPause
+  \inherits MultiResolutionImage
+  \brief This dialog is shown when the user pauses the game.
+*/
 
 MultiResolutionImage {
     id: imageDialogPause
@@ -14,7 +18,16 @@ MultiResolutionImage {
     height: parent.height*0.7
     width: parent.width*0.4
 
+    /*!
+      \qmlsignal DialogPause::resumeClicked
+      \brief This signal is emitted when the button "Resume" is clicked.
+     */
     signal resumeClicked()
+
+    /*!
+      \qmlsignal DialogPause::restartClicked
+      \brief This signal is emitted when the button "Restart" is clicked.
+     */
     signal restartClicked()
 
     Column {
@@ -78,11 +91,21 @@ MultiResolutionImage {
         }
     }
 
+    /*!
+      \qmlmethod void DialogPause::open()
+
+      It shows the dialog to the user.
+     */
     function open() {
         soundPause.play()
         imageDialogPause.visible = true
     }
 
+    /*!
+      \qmlmethod void DialogPause::close()
+
+      It closes the dialog.
+     */
     function close() {
         imageDialogPause.visible = false
     }

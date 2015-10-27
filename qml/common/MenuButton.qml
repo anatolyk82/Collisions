@@ -1,6 +1,12 @@
 import QtQuick 2.4
 import VPlay 2.0
 
+/*!
+  \qmltype MenuButton
+  \inherits Rectangle
+  \brief A push button with a text label and a picture.
+*/
+
 Rectangle {
     id: button
 
@@ -10,29 +16,81 @@ Rectangle {
     color: "transparent"
     //border.color: "gray"
 
-    // access the text of the Text component
+    /*!
+      \qmlproperty string MenuButton::text
+      \brief This property holds the text shown on the button. If the button has no text, the text property will be an empty string.
+     */
     property alias text: buttonText.text
 
-    // this handler is called when the button is clicked.
+    /*!
+      \qmlsignal BaseScene::buttonBack
+      \brief This signal is emitted when the button is clicked.
+     */
     signal clicked
 
-    //images of button for different states
+    /*!
+      \qmlproperty url MenuButton::imageSource
+      \brief This property holds the icon shown on the button.
+     */
     property url imageSource: ""
+
+    /*!
+      \qmlproperty url MenuButton::imageSourcePressed
+      \brief This property holds the icon shown on the button when the button is pressed.
+     */
     property url imageSourcePressed: ""
+
+    /*!
+      \qmlproperty url MenuButton::imageSourceChecked
+      \brief This property holds the icon shown on the button when the button is checked.
+     */
     property url imageSourceChecked: ""
 
-    //whether the button is checkable
+    /*!
+      \qmlproperty bool MenuButton::checkable
+      \brief This property holds whether the button is checkable.
+      The default value is false
+     */
     property bool checkable: false
+
+    /*!
+      \qmlproperty bool MenuButton::checked
+      \brief This property holds whether the button is checked.
+      The default value is false
+     */
     property bool checked: false
 
-    //colors of text
+    /*!
+      \qmlproperty bool MenuButton::textColor
+      \brief The color of the text shown on the button.
+      The default value is "black"
+     */
     property color textColor: "black"
+
+    /*!
+      \qmlproperty bool MenuButton::textColorPressed
+      \brief The color of the text shown on the button when the button is pressed.
+      The default value is "yellow"
+     */
     property color textColorPressed: "yellow"
+
+    /*!
+      \qmlproperty bool MenuButton::textColorChecked
+      \brief The color of the text shown on the button when the button is checked.
+      The default value is "grey"
+     */
     property color textColorChecked: "grey"
 
-    //size of text
+    /*!
+      \qmlproperty int MenuButton::textSize
+      \brief The size of the text in pixels.
+     */
     property alias textSize: buttonText.font.pixelSize
 
+    /*!
+      \qmlproperty bool MenuButton::soundEnabled
+      \brief Whether the sounds plays when the button is pressed.
+     */
     property bool soundEnabled: true
 
     clip: true
@@ -86,7 +144,13 @@ Rectangle {
         }
     }
 
+    /*!
+      \qmlmethod MenuButton::playSound()
+
+      It plays a sound when the button is pressed
+     */
     function playSound( file ) {
+        if( button.soundEnabled == false ) return
         var snd = componentSounds.createObject(button, {"source": file});
         if (snd == null) {
             console.log("Error creating sound");

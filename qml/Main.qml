@@ -7,7 +7,9 @@ import "scenes"
 //com.qtproject.anatolko.Collisions
 
 /*!
-    \qmltype Main
+  \qmltype Main
+  \inherits GameWindow
+  \brief The main window of the game
 */
 
 GameWindow {
@@ -29,6 +31,8 @@ GameWindow {
     EntityManager {
         id: entityManager
     }
+
+    //scaleMode: //TODO
 
     // menu scene
     MenuScene {
@@ -156,6 +160,11 @@ GameWindow {
         }
     }
 
+    /*!
+      \qmlmethod Main::initAllLevels()
+
+      It initializes all game levels from the XML file.
+     */
     function initAllLevels()
     {
         levelModel.clear()
