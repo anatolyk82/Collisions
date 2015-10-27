@@ -45,5 +45,7 @@ DISTFILES += \
     qml/game/HealthBar.qml \
     qml/common/DialogGameOver.qml \
     qml/game/GameTimer.qml \
-    qml/common/DialogGameEnded.qml
+    qml/common/DialogGameEnded.qml \
+    doc/collisions.qdocconf \
+    doc/mainpage.qdoc
 

@@ -1,0 +1,32 @@
+/*!
+\page indexx.html overview
+\title Collisions
+
+
+This is an example of game which is made with V-Plat engine. The source code of the game is available on \l {https://github.com/anatolyk82/Collisions} {GigHub}. The main idea of the game is that the user has his own ball and he needs to move it over the game field to avoid collisions with other balls which appear during the game. The game has several levels and depending how the user finishes a level he gets a  certain amount of stars for it.
+
+\section1 Assets
+All assets, which we need for the game, were taken from open resources such as
+
+\list
+ \li Music:   \l {http://soundimage.org}
+ \li Sounds:  \l {http://www.freesound.org}
+ \li Art:     \l {http://www.gameart2d.com}
+ \li Font:    \l {http://1001freefonts.com}
+\endlist
+
+and are available for free using.
+
+
+\section1
+
+Content:
+\list
+ \li The game menu and scenes
+ \li The game scene
+ \li Game objects
+ \li Levels
+\endlist
+
+
+*/

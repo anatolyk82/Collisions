@@ -6,6 +6,10 @@ import "scenes"
 
 //com.qtproject.anatolko.Collisions
 
+/*!
+    \qmltype Main
+*/
+
 GameWindow {
     id: app
     width: 854//960
