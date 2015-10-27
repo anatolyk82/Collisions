@@ -60,7 +60,7 @@ BaseScene {
                     anchors.horizontalCenter: parent.horizontalCenter
                     width: gridWrapper.width
                     wrapMode: Text.WordWrap
-                    text: qsTr(" Not everyone likes when someone is different, not like others. The same has happened to one big ball. It's bigger, it's heavier and it has some decorations on the surface. Other balls do not like it and they always try to destroy the ball just because it differs. Your purpose is to move the big ball over the game field to avoid collisions with other balls. Be careful, the big ball is heavy and you can lose control over the ball by moving it too fast. Each level will be harder for you but you should try. Save the big ball !")
+                    text: qsTr(" Not everyone likes when someone is different, not like others. The same has happened to one big ball. It's bigger, it's heavier and it has decorations. Other balls do not like it and they try to destroy the ball just because it differs. Your purpose is to move the big ball over the game field to avoid collisions with other balls. Be careful, the big ball is heavy and you can lose control over the ball by moving it too fast. Each level will be harder for you but you should try. Save the big ball !")
                 }
             }
 
@@ -76,13 +76,12 @@ BaseScene {
                     color: "transparent"
                     width: levelsGrid.cellWidth
                     height: levelsGrid.cellHeight
-                    //border.color: "blue"
 
                     MouseArea {
                         id: mouseArea
                         anchors.fill: parent
                         onClicked: {
-                            if( !isLevelLock( index, stars ) ) {
+                            if( !isLevelLocked( index, stars ) ) {
                                 gameScene.initGame( index )
                                 app.state = "game"
                                 gameScene.start() //start the pysics world
@@ -115,7 +114,7 @@ BaseScene {
                         antialiasing: true
                         anchors.horizontalCenter: parent.horizontalCenter
                         anchors.top: imageStars.bottom
-                        source: isLevelLock( index, stars ) ?
+                        source: isLevelLocked( index, stars ) ?
                                     "../../assets/buttons/button_empty_grey.png" :
                                     "../../assets/buttons/button_empty_blue.png"
                         height: parent.height*0.6
@@ -125,8 +124,7 @@ BaseScene {
                             text: level
                             font.bold: true
                             font.pixelSize: parent.height*0.5
-                            //color: stars == 0 ? "grey" : mouseArea.pressed ? "yellow" : "blue"
-                            color: isLevelLock( index, stars ) ? "grey" : mouseArea.pressed ? "yellow" : "blue"
+                            color: isLevelLocked( index, stars ) ? "grey" : mouseArea.pressed ? "yellow" : "blue"
                         }
                     }
                 }
@@ -134,7 +132,7 @@ BaseScene {
         }
     }
 
-    function isLevelLock( index, stars ) {
+    function isLevelLocked( index, stars ) {
         if( index == 0 ) {
             return false
         } else if(stars != 0 ) {

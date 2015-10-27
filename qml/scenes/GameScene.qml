@@ -141,7 +141,6 @@ BaseScene {
 
             //change the level model
             initAllLevels()
-            //levelModel.setProperty(levelIndex, key, stars)
         }
     }
 
@@ -310,19 +309,23 @@ BaseScene {
     }
 
 
+    /*
+     * 3 stars: 75 - 100 health points
+     * 2 stars: 36 - 74 health points
+     * 1 star: 1- 35 health points
+     */
     function grantStarsForCurrentLevel() {
-        if( (barHealth.value > 0)&&(barHealth.value < 33) ) {
-            return 1
-        } else if( (barHealth.value >= 33)&&(barHealth.value <= 66) ) {
+        if( barHealth.value >= 75 ) {
+            return 3
+        } else if(barHealth.value > 35) {
             return 2
         } else {
-            return 3
+            return 1
         }
     }
 
 
     function initGame( index ) {
-        console.log(">>> initGame: index="+index + " level:"+levelModel.get(index).level)
         gameScene.levelIndex = index
         gameScene.currentLevel = levelModel.get(index).level
         gameScene.currentStars = levelModel.get(index).stars
