@@ -15,7 +15,7 @@ BonusEntity {
 
     /*!
       \qmlproperty int Ball::health
-      \brief How much health a medical pack adds to the user's ball
+      \brief How much health a medical pack adds to the user's ball.
      */
     property int health: 20
 

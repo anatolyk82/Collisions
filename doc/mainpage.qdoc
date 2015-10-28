@@ -3,7 +3,7 @@
 \title Collisions
 
 
-This is an example of game which is made with {V-Play} {http://v-play.net} engine. The source code of the game is available on \l {https://github.com/anatolyk82/Collisions} {GigHub}. The main idea of the game is that the user has his own ball and he needs to move it over the game field to avoid collisions with other balls which appear during the game. The game has several levels and depending how the user finishes a level he gets a  certain amount of stars for it.
+This is an example of game which is made with \l {http://v-play.net} {V-Play} engine. The source code of the game is available on \l {https://github.com/anatolyk82/Collisions} {GigHub}. The main idea of the game is that the user has his own ball and he needs to move it over the game field to avoid collisions with other balls which appear during the game. The game has several levels and depending how the user finishes a level he gets a  certain amount of stars for it.
 
 \section1 Assets
 All assets, which we need for the game, were taken from open resources such as
@@ -19,7 +19,6 @@ and are available for free using.
 
 
 \section1
-
 Content:
 \list
  \li The game menu and scenes
@@ -28,25 +27,94 @@ Content:
  \li Levels
 \endlist
 
-Game types:
+
 \section1
-\list
- \li \l {Main} : The main game window
- \li \l {BaseScene} : The main scene of all game scenes
- \li \l {SettingsScene}
- \li \l {CreditsScene}
- \li \l {MenuScene}
- \li \l {Label}
- \li \l {MenuButton}
- \li \l {DialogPause}
- \li \l {DialogGameOver}
- \li \l {DialogGameEnded}
- \li \l {Ball}
- \li \l {UsersBall}
- \li \l {Wall}
- \li \l {MedPack}
- \li \l {BonusEntity}
- \li \l {GameTimer}
-\endlist
+Game types:
+
+Scenes:
+
+\table 50%
+ \header
+  \li Type
+  \li Short desription
+ \row
+  \li \l {Main}
+  \li The main game window
+ \row
+  \li \l {BaseScene}
+  \li The main scene for all scenes in the game.
+ \row
+  \li \l {SettingsScene}
+  \li This scene shows game settings.
+ \row
+  \li \l {CreditsScene}
+  \li This scene shows information about the game.
+ \row
+  \li \l {MenuScene}
+  \li This scene shows the main menu of the game.
+ \row
+  \li \l {GameScene}
+  \li This scene shows the game field.
+\endtable
+
+
+Common types:
+
+\table 50%
+ \header
+  \li Type
+  \li Short desription
+ \row
+  \li \l {Label}
+  \li It shows text on a scene.
+ \row
+  \li \l {MenuButton}
+  \li A push button with a text label and a picture.
+ \row
+  \li \l {DialogPause}
+  \li This dialog is shown when the user pauses the game.
+ \row
+  \li \l {DialogGameOver}
+  \li This dialog is shown when the user loses the game.
+ \row
+  \li \l {DialogGameEnded}
+  \li This dialog is shown when the user wins the game.
+\endtable
+
+
+Game obects:
+
+\table 70%
+ \header
+  \li Type
+  \li Short desription
+ \row
+  \li \l {Ball}
+  \li A physics object on the game scene represented as a ball.
+ \row
+  \li \l {BallGenerator}
+  \li An invisible game object on the game scene for generating of balls.
+ \row
+  \li \l {UsersBall}
+  \li A physics object on the game scene represented as a ball. The main characted of the game.
+ \row
+  \li \l {Wall}
+  \li A physics object on the game scene represented as a wall.
+ \row
+  \li \l {BonusEntity}
+  \li A physics object on the game scene represented as a bonus item. It doesn't react on collisions.
+ \row
+  \li \l {MedPack}
+  \li A physics object on the game scene represented as a medpack. It restores health to the user's ball.
+ \row
+  \li \l {MedpackGenerator}
+  \li An invisible game object on the game scene for generating of medpacks.
+ \row
+  \li \l {GameTimer}
+  \li A graphic object on the game scene which shows time for the current level.
+ \row
+  \li \l {HealthBar}
+  \li A graphic object on the game scene which shows the player the current amount of health points.
+\endtable
 
 */

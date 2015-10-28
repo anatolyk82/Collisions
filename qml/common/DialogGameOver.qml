@@ -19,13 +19,13 @@ MultiResolutionImage {
     width: parent.width*0.4
 
     /*!
-      \qmlsignal DialogGameOver::menuClicked
+      \qmlsignal void DialogGameOver::menuClicked()
       \brief This signal is emitted when the button "Menu" is clicked.
      */
     signal menuClicked()
 
     /*!
-      \qmlsignal DialogGameOver::restartClicked
+      \qmlsignal void DialogGameOver::restartClicked()
       \brief This signal is emitted when the button "Restart" is clicked.
      */
     signal restartClicked()

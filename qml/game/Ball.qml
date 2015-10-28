@@ -22,17 +22,19 @@ EntityBase {
 
     /*!
       \qmlproperty alias Ball::body
-      \brief This property alias allows access to the physics Body of the ball.
+      \brief This alias allows access to the physics Body of the ball.
      */
     property alias body: ballCollider.body
 
     /*!
       \qmlproperty double Ball::impulseX
+      \brief X value of the impulse
      */
     property double impulseX
 
     /*!
       \qmlproperty double Ball::impulseY
+      \brief Y value of the impulse
      */
     property double impulseY
 
@@ -78,7 +80,6 @@ EntityBase {
 
     /*!
       \qmlmethod void Ball::pushBall()
-
       It pushes the ball when it is created
      */
     function pushBall() {
@@ -101,7 +102,6 @@ EntityBase {
 
     /*!
       \qmlmethod void Ball::playSound( url file )
-
       It plays sounds for the the ball
      */
     function playSound( file ) {

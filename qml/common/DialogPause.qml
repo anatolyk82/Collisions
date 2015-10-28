@@ -19,13 +19,13 @@ MultiResolutionImage {
     width: parent.width*0.4
 
     /*!
-      \qmlsignal DialogPause::resumeClicked
+      \qmlsignal void DialogPause::resumeClicked()
       \brief This signal is emitted when the button "Resume" is clicked.
      */
     signal resumeClicked()
 
     /*!
-      \qmlsignal DialogPause::restartClicked
+      \qmlsignal void DialogPause::restartClicked()
       \brief This signal is emitted when the button "Restart" is clicked.
      */
     signal restartClicked()

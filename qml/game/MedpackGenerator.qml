@@ -1,17 +1,47 @@
 import QtQuick 2.4
 import VPlay 2.0
 
+/*!
+  \qmltype MedpackGenerator
+  \inherits Item
+  \brief An invisible game object on the game scene for generating of medpacks.
+*/
+
+
 Item {
     id: generator
 
-    property int medpackProbability: 20  //probability of generating a medpack is "medpackProbability" percent
-    property int sizeMedpack: 30         //size of medpack
-    property int health: 20              //how much health a medpack gives the user's ball
+    /*!
+      \qmlproperty int MedpackGenerator::medpackProbability
+      \brief Probability of generating a medpack on the game field.
+      The value should be between 0 and 100. Higher values are ignored.
+     */
+    property int medpackProbability: 20
 
+    /*!
+      \qmlproperty int MedpackGenerator::sizeMedpack
+      \brief The size of medpack.
+     */
+    property int sizeMedpack: 30
+
+    /*!
+      \qmlproperty int MedpackGenerator::health
+      \brief How many health points a medpack gives.
+     */
+    property int health: 20
+
+    /*!
+      \qmlmethod void MedpackGenerator::start()
+      It starts the generator.
+     */
     function start() {
         timerGenerator.start()
     }
 
+    /*!
+      \qmlmethod void MedpackGenerator::stop()
+      It stops the generator.
+     */
     function stop() {
         timerGenerator.stop()
     }
@@ -54,7 +84,10 @@ Item {
         }
     }
 
-    //this removes a medpack from the world if the medpack is touched by the user
+    /*!
+      \qmlmethod void MedpackGenerator::medpackIsBeingTouchedByUser()
+      This slot removes a medpack from the game scene when the user touches it with the ball
+     */
     function medpackIsBeingTouchedByUser( entityId ) {
         entityManager.removeEntityById(entityId)
     }

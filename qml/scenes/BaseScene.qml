@@ -5,7 +5,7 @@ import "../common"
 /*!
   \qmltype Main
   \inherits GameWindow
-  \brief This is the main scene for all scenes in the game
+  \brief This is the main scene for all scenes in the game.
 */
 
 Scene {
@@ -33,8 +33,8 @@ Scene {
     property alias backText: buttonBack.text
 
     /*!
-      \qmlproperty MenuButton BaseScene::buttonBack
-      \brief The back button with availability of all properties.
+      \qmlproperty alias BaseScene::buttonBack
+      \brief This alias allows access to the back button object.
      */
     property alias buttonBack: buttonBack
 
@@ -51,8 +51,8 @@ Scene {
     property alias headerText: labelHeader.text
 
     /*!
-      \qmlproperty Label BaseScene::labelHeader
-      \brief The page header.
+      \qmlproperty alias BaseScene::labelHeader
+      \brief This alias allows access to the header object.
      */
     property alias header: labelHeader
 

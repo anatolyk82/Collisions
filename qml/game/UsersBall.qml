@@ -23,7 +23,7 @@ EntityBase {
 
     /*!
       \qmlproperty alias UsersBall::body
-      \brief This property alias allows access to the physics Body of the ball.
+      \brief This alias allows access to the physics Body of the ball.
      */
     property alias body: ballCollider.body
 
@@ -119,8 +119,7 @@ EntityBase {
 
     /*!
       \qmlmethod void UsersBall::playSound( url file )
-
-      It plays sounds for the the user's ball
+      It plays sounds for the the user's ball.
      */
     function playSound( file ) {
         var snd = componentSounds.createObject(ball, {"source": file});

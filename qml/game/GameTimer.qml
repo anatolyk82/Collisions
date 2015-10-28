@@ -7,19 +7,18 @@ import "../common"
   \brief A graphic object on the game scene which shows time for the current level.
 */
 
-
 Item {
     id: gameTimer
 
     /*!
       \qmlproperty int GameTimer::gameMillisecondsTotal
-      \brief The total amount of seconds which the timer has to count down
+      \brief The total amount of milliseconds which the timer has to count down.
      */
     property int gameMillisecondsTotal: 30000
 
     /*!
       \qmlproperty int GameTimer::gameMillisecondsCurrent
-      \brief The current amount of seconds which are left to count down.
+      \brief The current amount of milliseconds which are left to count down.
      */
     property int gameMillisecondsCurrent: gameMillisecondsTotal
 
@@ -28,7 +27,7 @@ Item {
 
     /*!
       \qmlmethod void GameTimer::stop()
-      It stops the game timer
+      It stops the game timer.
      */
     function stop() {
         timer.stop()
@@ -36,7 +35,7 @@ Item {
 
     /*!
       \qmlmethod void GameTimer::start()
-      It starts the game timer
+      It starts the game timer.
      */
     function start() {
         gameMillisecondsCurrent = gameMillisecondsTotal
@@ -45,7 +44,7 @@ Item {
 
     /*!
       \qmlmethod void GameTimer::pause()
-      It pauses the game timer
+      It pauses the game timer.
      */
     function pause( isPaused ) {
         if( isPaused ) {
@@ -107,14 +106,14 @@ Item {
 
     /*!
       \qmlmethod string GameTimer::formatTime( milliseconds )
-      It converts \a milliseconds to a formatted string such as MM:SS.MS
+      It converts \a milliseconds to a formatted string of time. It looks like MM:SS.MS
      */
     function formatTime( milliseconds ) {
 
-        /*!
-          \qmlmethod string GameTimer::addZ( n )
+        /*
+          qmlmethod string GameTimer::addZ( n )
          */
-        function addZ(n) { return (n<10? '0':'') + n; }
+        //function addZ(n) { return (n<10? '0':'') + n; }
 
         var ms = s % 1000;
         s = (s - ms) / 1000;
@@ -122,7 +121,8 @@ Item {
         s = (s - secs) / 60;
         var mins = s % 60;
 
-        return addZ(mins) + ':' + addZ(secs) + '.' + (ms / 100);
+        //return addZ(mins) + ':' + addZ(secs) + '.' + (ms / 100);
+        return (mins<10 ? '0'+mins : mins) + ':' + (secs<10 ? '0'+secs : secs) + '.' + (ms / 100);
     }
 }
 

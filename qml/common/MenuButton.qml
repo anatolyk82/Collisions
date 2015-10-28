@@ -23,7 +23,7 @@ Rectangle {
     property alias text: buttonText.text
 
     /*!
-      \qmlsignal BaseScene::buttonBack
+      \qmlsignal void MenuButton::buttonBack()
       \brief This signal is emitted when the button is clicked.
      */
     signal clicked
@@ -145,7 +145,7 @@ Rectangle {
     }
 
     /*!
-      \qmlmethod MenuButton::playSound()
+      \qmlmethod MenuButton::playSound( url file )
 
       It plays a sound when the button is pressed
      */

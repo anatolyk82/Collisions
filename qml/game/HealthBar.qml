@@ -1,11 +1,31 @@
 import QtQuick 2.4
 import "../common"
 
+/*!
+  \qmltype HealthBar
+  \inherits Item
+  \brief A graphic object on the game scene which shows the player the current amount of health points.
+*/
 
 Item {
     id: bar
+
+    /*!
+      \qmlproperty int HealthBar::maxValue
+      \brief The maximum value of health points.
+     */
     property int maxValue: 100
+
+    /*!
+      \qmlproperty int HealthBar::minValue
+      \brief The minimum value of health points.
+     */
     property int minValue: 0
+
+    /*!
+      \qmlproperty int HealthBar::value
+      \brief A current value of health points.
+     */
     property int value: 50
 
     onValueChanged: {

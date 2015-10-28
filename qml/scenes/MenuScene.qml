@@ -16,19 +16,19 @@ BaseScene {
     // signals that indicating that the an item menu had been selected
     /*!
       \qmlsignal void MenuScene::selectLevelPressed()
-      \brief It is emitted when the user selects "Game". {SelectLevelScene} becomes active.
+      \brief It is emitted when the user selects "Game". SelectLevelScene becomes active.
      */
     signal selectLevelPressed
 
     /*!
       \qmlsignal void MenuScene::settingsPressed()
-      \brief It is emitted when the user selects "Settings". {SettingsScene} becomes active.
+      \brief It is emitted when the user selects "Settings". SettingsScene becomes active.
      */
     signal settingsPressed
 
     /*!
       \qmlsignal void MenuScene::creditsPressed()
-      \brief It is emitted when the user selects "Credits". {CreditScene} becomes active.
+      \brief It is emitted when the user selects "Credits". CreditsScene becomes active.
      */
     signal creditsPressed
 

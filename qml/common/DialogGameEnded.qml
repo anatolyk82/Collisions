@@ -22,19 +22,19 @@ MultiResolutionImage {
     width: parent.width*0.4
 
     /*!
-      \qmlsignal DialogGameEnded::menuClicked
+      \qmlsignal void DialogGameEnded::menuClicked()
       \brief This signal is emitted when the button "Menu" is clicked.
      */
     signal menuClicked()
 
     /*!
-      \qmlsignal DialogGameEnded::restartClicked
+      \qmlsignal void DialogGameEnded::restartClicked()
       \brief This signal is emitted when the button "Restart" is clicked.
      */
     signal restartClicked()
 
     /*!
-      \qmlsignal DialogGameEnded::nextClicked
+      \qmlsignal void DialogGameEnded::nextClicked()
       \brief This signal is emitted when the button "Next" is clicked.
      */
     signal nextClicked()
@@ -82,7 +82,7 @@ MultiResolutionImage {
     /*!
       \qmlmethod void DialogGameEnded::open( int stars )
 
-      It shows the dialog to the user with \a stars
+      It shows the dialog to the user and sets \a stars on the dialog.
      */
     function open( stars ) {
         buttonRestart.enabled = false
@@ -147,7 +147,7 @@ MultiResolutionImage {
     /*!
       \qmlmethod void DialogGameEnded::playSound( url file )
 
-      It plays sounds for the dialod
+      It plays sounds in the dialod.
      */
     function playSound( file ) {
         var snd = componentSounds.createObject(imageDialogGameEnded, {"source": file});

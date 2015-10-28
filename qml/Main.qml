@@ -14,8 +14,8 @@ import "scenes"
 
 GameWindow {
     id: app
-    width: 854//960
-    height: 480//640
+    width: 854
+    height: 480
 
     // You get free licenseKeys from http://v-play.net/licenseKey
     // With a licenseKey you can:

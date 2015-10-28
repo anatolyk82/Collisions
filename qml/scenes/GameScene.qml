@@ -3,25 +3,89 @@ import VPlay 2.0
 import "../common"
 import "../game"
 
+/*!
+  \qmltype GameScene
+  \inherits BaseScene
+  \brief This scene shows the game field.
+*/
+
+
 BaseScene {
     id: gameScene
 
     /*--- level settings ---*/
-    property int levelIndex: 0  //index of this current level in the ListModel
+    /*!
+      \qmlproperty int GameScene::levelIndex
+      \brief The index of current level.
+     */
+    property int levelIndex: 0
+
+    /*!
+      \qmlproperty int GameScene::currentLevel
+      \brief The number of current level.
+     */
     property int currentLevel: 1
+
+    /*!
+      \qmlproperty int GameScene::currentStars
+      \brief The current amount of stars which were granted for this level.
+     */
     property int currentStars: 0
+
+    /*!
+      \qmlproperty int GameScene::totalTime
+      \brief The total amount of milliseconds which the timer has to count down.
+     */
     property alias totalTime: gameTimer.gameMillisecondsTotal
 
+    /*!
+      \qmlproperty int GameScene::periodOfBalls
+      \brief The interval in milliseconds between generating of balls.
+     */
     property alias periodOfBalls: ballGenerator.intervalBetweenBalls
+
+    /*!
+      \qmlproperty int GameScene::timePreparation
+      \brief The interval in milliseconds to show the user where a new ball is going to appear.
+     */
     property alias timePreparation: ballGenerator.preparatoryInterval
+
+    /*!
+      \qmlproperty int GameScene::ballDamage
+      \brief How many health points a ball takes away.
+     */
     property alias ballDamage: ballGenerator.ballDamage
+
+    /*!
+      \qmlproperty int GameScene::ballImpulse
+      \brief The amplitude of the impulse applying to a ball when it appears.
+     */
     property alias ballImpulse: ballGenerator.ballImpulse
+
+    /*!
+      \qmlproperty int GameScene::ballImpulseAdditional
+      \brief An additional amplitude of the impulse applying to a ball when it appears.
+      A new value is generated in the range from 0 to \a ballImpulseAdditional and it adds to \a ballImpulse.
+     */
     property alias ballImpulseAdditional: ballGenerator.ballImpulseAdditional
 
+    /*!
+      \qmlproperty int GameScene::medpackProbability
+      \brief Probability of generating a medpack on the game field.
+      The value should be between 0 and 100. Higher values are ignored.
+     */
     property alias medpackProbability: medpackGenerator.medpackProbability
+
+    /*!
+      \qmlproperty int GameScene::medpackHealth
+      \brief How many health points a medpack gives.
+     */
     property alias medpackHealth: medpackGenerator.health
 
-
+    /*!
+      \qmlproperty int GameScene::usersBallSize
+      \brief The size of the user's ball.
+     */
     property int usersBallSize: 30
 
     //we do not need to see the header and button text
@@ -246,7 +310,10 @@ BaseScene {
 
     /**** manage the game scene ****/
 
-    /* this starts the game */
+    /*!
+      \qmlmethod void GameScene::start()
+      It starts the game.
+     */
     function start() {
         //close all previous dialogs
         dialogGameEnded.close()
@@ -271,7 +338,10 @@ BaseScene {
         buttonPause.visible = true
     }
 
-    /* this function pauses the game */
+    /*!
+      \qmlmethod void GameScene::pause( bool isPaused )
+      It pauses the game.
+     */
     function pause( isPaused ) {
         gameTimer.pause( isPaused )
         if( isPaused ) {
@@ -285,7 +355,10 @@ BaseScene {
         }
     }
 
-    /* this function stops the game */
+    /*!
+      \qmlmethod void GameScene::stop()
+      It stops the game.
+     */
     function stop() {
         gameTimer.stop()
         medpackGenerator.stop()
@@ -298,6 +371,10 @@ BaseScene {
     }
 
     /* it calls whenever health changes */
+    /*!
+      \qmlmethod void GameScene::currentHealthChangedSlot()
+      It is called whenever the user's ball changes its health.
+     */
     function currentHealthChangedSlot() {
         barHealth.value = entityManager.getEntityById("usersBall").currentHealth
         //if the ball doesn't have health anomore, stop the game
@@ -309,10 +386,15 @@ BaseScene {
     }
 
 
-    /*
-     * 3 stars: 75 - 100 health points
-     * 2 stars: 36 - 74 health points
-     * 1 star: 1- 35 health points
+    /*!
+      \qmlmethod int GameScene::grantStarsForCurrentLevel()
+      It grants the user starts when the user finishes a level.
+      It depends how much health the user's ball has when a level is done.
+      \list
+       \li 3 stars: 75 - 100 health points
+       \li 2 stars: 36 - 74 health points
+       \li 1 star: 1- 35 health points
+      \endlist
      */
     function grantStarsForCurrentLevel() {
         if( barHealth.value >= 75 ) {
@@ -325,6 +407,11 @@ BaseScene {
     }
 
 
+    /*!
+      \qmlmethod void GameScene::initGame( int index )
+      It is called whenever a level changes. It takes settings from the XML and initializes all game properties.
+      \a index - an index of current level in the level model.
+     */
     function initGame( index ) {
         gameScene.levelIndex = index
         gameScene.currentLevel = levelModel.get(index).level
