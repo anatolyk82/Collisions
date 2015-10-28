@@ -2,6 +2,10 @@
 \page index.html overview
 \title Collisions
 
+\inlineimage ic_launcher.png
+\b {How to make “Collisions” with V-Play}
+
+\image game.jpg
 
 This is an example of game which is made with \l {http://v-play.net} {V-Play} engine. The source code of the game is available on \l {https://github.com/anatolyk82/Collisions} {GigHub}. The main idea of the game is that the user has his own ball and he needs to move it over the game field to avoid collisions with other balls which appear during the game. The game has several levels and depending how the user finishes a level he gets a  certain amount of stars for it.
 
@@ -19,17 +23,18 @@ and are available for free using.
 
 
 \section1
-Content:
+Tutorial
 \list
- \li The game menu and scenes
- \li The game scene
- \li Game objects
- \li Levels
+ \li \l {The game menu and scenes}
+ \li \l {The game scene}
+ \li \l {Game objects}
+ \li \l {Levels}
+ \li \l {Further development}
 \endlist
 
 
 \section1
-Game types:
+Game types
 
 Scenes:
 

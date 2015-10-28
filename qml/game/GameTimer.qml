@@ -115,11 +115,11 @@ Item {
          */
         //function addZ(n) { return (n<10? '0':'') + n; }
 
-        var ms = s % 1000;
-        s = (s - ms) / 1000;
-        var secs = s % 60;
-        s = (s - secs) / 60;
-        var mins = s % 60;
+        var ms = milliseconds % 1000;
+        milliseconds = (milliseconds - ms) / 1000;
+        var secs = milliseconds % 60;
+        milliseconds = (milliseconds - secs) / 60;
+        var mins = milliseconds % 60;
 
         //return addZ(mins) + ':' + addZ(secs) + '.' + (ms / 100);
         return (mins<10 ? '0'+mins : mins) + ':' + (secs<10 ? '0'+secs : secs) + '.' + (ms / 100);

@@ -1,0 +1,180 @@
+/*!
+\page tutorial_game_objects.html tutorial
+\title Game objects
+\previouspage The game scene
+\nextpage Levels
+
+
+There are four types of physics objects on the game scene:
+\list
+ \li Walls
+ \li Other balls
+ \li The user’s ball
+ \li Medpack
+\endlist
+
+To avoid an endless world we restrict it with walls. \l {Wall} is a physics object and it doesn't allow other objects to move out of the screen.
+\qml
+EntityBase {
+   id: wall
+   entityType: "wallType"
+
+   Rectangle {
+       id: boxImage
+       width: parent.width
+       height: parent.height
+       color: "transparent"
+   }
+
+   BoxCollider {
+       anchors.fill: boxImage
+       bodyType: Body.Static
+   }
+}
+\endqml
+
+The user’s ball is created dynamically in the function \e {start()}. We also need to know here when the ball is hit by others to change displaying the current amount of health in \l {HealthBar}.
+\code
+entityManager.createEntityFromUrlWithProperties ( Qt.resolvedUrl("../game/UsersBall.qml"), {
+                    x: (world.width/2-usersBallSize),
+                    y: (world.height/2-usersBallSize),
+                    radius: usersBallSize } )
+//connect signals from the ball
+var usersBallObject = entityManager.getEntityById("usersBall")
+usersBallObject.onCurrentHealthChanged.connect( currentHealthChangedSlot )
+\endcode
+
+Every time when the ball is hit it emits a signal \e {currentHealthChanged()}. In its turn it calls a slot \e {currentHealthChangedSlot()} where we can show ball’s health and stop the game if the ball runs out of health.
+\code
+function currentHealthChangedSlot() {
+       barHealth.value = entityManager.getEntityById("usersBall").currentHealth
+       if( barHealth.value <= 0 ) {
+              gameScene.pause(true)
+              dialogGameOver.open()
+       }
+}
+\endcode
+
+All objects have their own unique \e {entityType} that helps to detect which object hit a considering element.  As for the user’s ball it does it like this:
+\code
+fixture.onBeginContact: {
+   var body = other.getBody();
+   var collidedEntity = body.target;
+   var collidedEntityType = collidedEntity.entityType;
+   if( collidedEntityType == "ballType" ) {
+      currentHealth -= collidedEntity.damage
+      playSound("../../assets/sounds/usersBallOnBall.wav")
+    } else if( collidedEntityType == "medpackType" ) {
+       currentHealth += collidedEntity.health
+       playSound("../../assets/sounds/medpackTaken.wav")
+    } else if( collidedEntityType == "wallType" ) {
+       playSound("../../assets/sounds/ballOnWall.wav")
+    }
+}
+\endcode
+In case if the user’s ball collides with another ball, it makes a collision sound and decrease its health. It also can collide with a medpack to restore health or walls.
+
+A medpack is an object which restores ball's health on a certain amount of points. We do not want lose game levels too fast because collisions happen quite often so we need such an object on the game field. \l {MedPack} is a physics object as well but it has the property sensor set true. It means it doesn't react on a collision but appropriate signal is emitted. We only need to remove a medpack if the player touches it with the ball.
+\code
+fixture.onBeginContact: {
+   var body = other.getBody();
+   var collidedEntity = body.target;
+   var collidedEntityType = collidedEntity.entityType;
+   if( collidedEntityType == "usersBallType" ) {
+      bonus.contactWithUsersBall( entityId )
+   }
+}
+\endcode
+
+So we can receive the signalcontactWithUsersBall() and remove it from the scene.
+Actually \l {MedPack} is just an inheritor of \l {BonusEntity} which can be used for further development. We can create other sensors for the game based on it.
+
+The user’s ball and other balls have a very similar structure with some differences. Both object contain a physics body \l {http://v-play.net/doc/vplay-circlecollider} {CircleCollider} with a round shape. The user’s ball changes its picture depending how much damage it has absorbed. Other balls shall start moving after their appearance. For this target an impulse is applied whenever a ball appears so it has such code:
+\code
+function pushBall() {
+var localForwardVector =  ballCollider.body.toWorldVector(Qt.point(ball.impulseX,ball.impulseY));
+       ballCollider.body.applyLinearImpulse( localForwardVector, ballCollider.body.getWorldCenter() );
+}
+
+Component.onCompleted: {
+   pushBall()
+}
+\endcode
+
+It pushes each ball right after its appearance. Later we will will realise how it takes values \e {ball.impulseX} and \e {ball.impulseY}.
+
+There should be additional logic which helps to create dynamic objects like balls and medpacks. For these targets there are two game components called \l {BallGenerator} and \l {MedpackGenerator}. Let's consider both of those components and find out how they work.
+
+The simplest one is \l {MedpackGenerator} which contains a timer. Periodically the timer gets a random value in the range from 1 to 100. If we say that a medpack shall appear with a probability 30 percents, we need to check whether the random value is in the range from 1 to 30. If so, a medpack is generated. Otherwise we just wait for the next trigger event when the random value will be checked again. In the game the timer has a period 5 seconds.
+\code
+onTriggered: {
+        var randomValue = Math.round( utils.generateRandomValueBetween(0,100) )
+        if( (randomValue >= 0) && (randomValue <= medpackProbability) ) {
+               _medpackUniqueId += 1
+
+               //for X
+               var packX = Math.random()*generator.parent.width
+               if( packX < 2*sizeMedpack ) {
+                   packX += 2*sizeMedpack
+               } else if( packX > (generator.parent.width - 2*sizeMedpack)) {
+                   packX -= 2*sizeMedpack
+               }
+
+               //for Y
+               var packY = Math.random()*generator.parent.height
+               if( packY < 2*sizeMedpack ) {
+                   packY += 2*sizeMedpack
+               } else if( packY > (generator.parent.height - 2*sizeMedpack)) {
+                   packY -= 2*sizeMedpack
+               }
+
+               var medpackId = "medpackId" + _medpackUniqueId
+               entityManager.createEntityFromUrlWithProperties( Qt.resolvedUrl("MedPack.qml"),
+                             { entityId: medpackId, x: packX, y: packY, sizeBox: sizeMedpack, health: health} )
+
+               var medpackObject = entityManager.getEntityById( medpackId )
+               medpackObject.contactWithUsersBall.connect( medpackIsBeingTouchedByUser )
+
+               medpackSound.play()
+        }
+}
+\endcode
+So we can see that if a medpack is touched by the user’s ball, it calls a slot
+\code
+function medpackIsBeingTouchedByUser( entityId ) {
+       entityManager.removeEntityById(entityId)
+}
+\endcode
+which removes the medpack with a unique id \e {entityId}.
+
+
+Similarly \l {BallGenerator} works but instead a random event it generates a ball on every timer event.
+\code
+onTriggered: {
+           //calculate an impulse for the ball
+           var angle = Math.round( Math.random()*360 )
+           var impulse = generator.ballImpulse + Math.random()*generator.ballImpulseAdditional
+           var impulseX = impulse * Math.cos(angle * Math.PI / 180);
+           var impulseY = impulse * Math.sin(angle * Math.PI / 180);
+
+           entityManager.createEntityFromUrlWithProperties(
+                       Qt.resolvedUrl("Ball.qml"),
+                       {
+                           x: ballX,
+                           y: ballY,
+                           radius: generator.ballSize,
+                           impulseX: impulseX,
+                           impulseY: impulseY,
+                           damage: ballDamage
+                       }
+                       )
+
+           //count the nex interval for a ball
+           timerIntervalBetweenBalls.start()
+}
+\endcode
+\l {BallGenerator} actually has two timers. The first one makes a pause between two balls. When its event comes it triggers the second timer which generates a special visual effect with a sprite animation to show the user where the next ball is going to be appear.
+\image ball_appearance.jpg
+
+This is how the game works. If the user’s ball runs out of health, the player loses the game. He needs to avoid colliding with balls for a certain period. That period is different for each level.
+*/

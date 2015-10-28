@@ -46,6 +46,9 @@ Item {
         timerGenerator.stop()
     }
 
+    /*!
+      \qmlproperty int MedpackGenerator::_medpackUniqueId
+     */
     property int _medpackUniqueId: 0   //helps to generate a medpack with a unique Id
     Timer {
         id: timerGenerator

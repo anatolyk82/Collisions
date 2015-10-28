@@ -1,9 +1,7 @@
-#read this: http://doc.qt.io/qt-5/27-qdoc-commands-alphabetical.html
-#read this: http://doc.qt.io/qt-5/qtwritingstyle-qml.html
-
 project = Collisions
 description = Collisions is a small game powered by V-Play engine
 sourcedirs = . ../qml
+imagedirs = ./images
 
 sources.fileextensions = "*.qml *qdoc"
 

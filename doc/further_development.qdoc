@@ -1,0 +1,24 @@
+/*!
+\page tutorial_further_development.html tutorial
+\title Further development
+\previouspage Levels
+\nextpage Collisions
+
+The game can be developed. Here are some ideas about further developing
+\list
+ \li Number of levels can be expanded.
+ \li Levels can have more walls and barriers.
+ \li Stars can appear on the game field for picking up. The more stars the user picks up the more scores he gets for a level.
+ \li There can be more bonus items. For instance if the user picks up a special bonus item, he can destroy any ball on the game scene by hitting it.
+ \li A bonus item which can reduce level time but it should be shown for short time.
+ \li A bonus item which can make the ball invulnerable for short time.
+ \li Some achievements can be added:
+  \list
+   \li A certain period with no collisions.
+   \li Survival with no medpacks.
+  \endlist
+\endlist
+
+All necessary tools for some of those ideas already exist in the game and can be easily applied for developing.
+
+*/

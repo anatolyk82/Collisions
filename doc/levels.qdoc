@@ -1,0 +1,132 @@
+/*!
+\page tutorial_levels.html tutorial
+\title Levels
+\previouspage Game objects
+\nextpage Further development
+
+The game has a number of levels with different behaviour of game elements. The game field never changes, only game elements behave differently. Somehow we need to store those settings for each level. The game uses an XML file. The file is located in \e {qml/levels/levels.xml} and looks like this:
+\code
+<levels>
+   <level>
+       <numLevel>1</numLevel>
+       <totalTime>20000</totalTime>
+       <periodOfBalls>15000</periodOfBalls>
+       <timePreparation>3000</timePreparation>
+       <ballImpulse>100</ballImpulse>
+       <ballImpulseAdditional>100</ballImpulseAdditional>
+       <medpackProbability>50</medpackProbability>
+       <medpackHealth>20</medpackHealth>
+       <ballDamage>20</ballDamage>
+   </level>
+…
+</levels>
+\endcode
+
+Each section \e {<level>...</level>} of the XML is responsible for settings of appropriate level. All settings are stored in \l {http://doc.qt.io/qt-5/qml-qtqml-models-listmodel.html} {ListModel} after XML parsing by \l {http://doc.qt.io/qt-5/qml-qtquick-xmllistmodel-xmllistmodel.html} {XmlListModel}. When a level runs, the game scene reads all settings to configure the game elements.
+\qml
+XmlListModel {
+       id: xmlModelLevels
+       source: "./levels/levels.xml"
+       query: "/levels/level"
+
+       XmlRole { name: "level"; query: "numLevel/number()" }
+       XmlRole { name: "totalTime"; query: "totalTime/number()" }
+       XmlRole { name: "periodOfBalls"; query: "periodOfBalls/number()" }
+       XmlRole { name: "timePreparation"; query: "timePreparation/number()" }
+       XmlRole { name: "medpackProbability"; query: "medpackProbability/number()" }
+       XmlRole { name: "medpackHealth"; query: "medpackHealth/number()" }
+       XmlRole { name: "ballDamage"; query: "ballDamage/number()" }
+       XmlRole { name: "ballImpulse"; query: "ballImpulse/number()" }
+       XmlRole { name: "ballImpulseAdditional"; query: "ballImpulseAdditional/number()" }
+
+       onStatusChanged: {
+           if( status == XmlListModel.Error ) {
+               console.log("Error: " + errorString() )
+           }
+           if( status == XmlListModel.Ready ) {
+               initAllLevels()
+           }
+     }
+}
+\endqml
+
+Here:
+\list
+ \li \e{level} - the level number
+ \li \e{totalTime} - how much time the level lasts
+ \li \e{periodOfBalls} - the period between two balls
+ \li \e{timePreparation} - how much the visual effect of appearance lasts
+ \li \e{medpackProbability} - how often medpacks appear on the game field
+ \li \e{medpackHealth} - how much health a medpack gives
+ \li \e{ballDamage} - how much health a ball takes away
+ \li \e{ballImpulse} - an amplitude of the impulse applying to a ball
+ \li \e{ballImpulseAdditional} - additional impulse is generated in the range from 0 to this value
+\endlist
+
+The user receives stars for levels depending how well he plays. It depends how much health the ball has when level time runs out. We need to save those results. For this target the game uses \l {http://v-play.net/doc/vplay-storage} {Storage}. When a level is done, it saves the result
+\qml
+GameTimer {
+    id: gameTimer
+
+    onTimerIsOver: {
+           //stop the game
+           gameScene.pause( true )
+
+           //get stars for this level
+           var stars = grantStarsForCurrentLevel()
+
+           //save the result if it's better
+           var key = "level"+currentLevel
+           if( stars > gameScene.currentStars ) {
+               myLocalStorage.setValue( key, stars )
+           }
+           dialogGameEnded.open( stars )
+
+           //change the level model
+           initAllLevels()
+    }
+}
+\endqml
+
+When the level model initializes, it reads the values from \l {http://v-play.net/doc/vplay-storage} {Storage}.
+\code
+levelModel.clear()
+for( var j=0; j<xmlModelLevels.count; j++ ) {
+   var key = "level"+xmlModelLevels.get(j).level
+   var stars = myLocalStorage.getValue(key)
+   levelModel.append({
+      "level": xmlModelLevels.get(j).level,
+      "totalTime": xmlModelLevels.get(j).totalTime,
+      "periodOfBalls": xmlModelLevels.get(j).periodOfBalls,
+      "timePreparation": xmlModelLevels.get(j).timePreparation,
+      "medpackProbability": xmlModelLevels.get(j).medpackProbability,
+      "medpackHealth": xmlModelLevels.get(j).medpackHealth,
+      "ballDamage": xmlModelLevels.get(j).ballDamage,
+      "ballImpulse": xmlModelLevels.get(j).ballImpulse,
+      "ballImpulseAdditional": xmlModelLevels.get(j).ballImpulseAdditional,
+      "stars": stars == undefined ? 0 : stars
+   })
+}
+\endcode
+
+and now we can user \l {http://doc.qt.io/qt-5/qml-qtquick-gridview.html} {GridView} to display all available levels. If a level has stars, it’s unlocked. The level following after the last one which has stars is available to play. Levels, which do not have starts, are locked.
+\code
+function isLevelLocked( index, stars ) {
+   if( index == 0 ) {
+      return false
+   } else if(stars != 0 ) {
+      return false
+   } else {
+      var prev_stars = levelModel.get((index-1)).stars
+      if( prev_stars != 0 ) {
+         return false
+      } else {
+         return true
+      }
+   }
+}
+\endcode
+
+\image levels.jpg
+
+*/

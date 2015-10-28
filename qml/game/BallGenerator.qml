@@ -56,8 +56,19 @@ Item {
     property bool running: true
 
     /* internall properties */
+    /*!
+      \qmlproperty real BallGenerator::ballX
+     */
     property real ballX: 0.0
+
+    /*!
+      \qmlproperty real BallGenerator::ballY
+     */
     property real ballY: 0.0
+
+    /*!
+      \qmlproperty string BallGenerator::generatedParticlesId
+     */
     property string generatedParticlesId: ""
 
     /*!

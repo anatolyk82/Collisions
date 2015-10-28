@@ -48,5 +48,16 @@ DISTFILES += \
     qml/common/DialogGameEnded.qml \
     doc/collisions.qdocconf \
     doc/mainpage.qdoc \
-    doc/css/online.css
+    doc/game_menu_and_scenes.qdoc \
+    doc/the_game_scene.qdoc \
+    doc/game_objects.qdoc \
+    doc/further_development.qdoc \
+    doc/levels.qdoc \
+    doc/css/online.css \
+    doc/images/ball_appearance.jpg \
+    doc/images/basescene.jpg \
+    doc/images/game.jpg \
+    doc/images/levels.jpg \
+    doc/images/qtcreator.jpg \
+    doc/images/ic_launcher.png
 

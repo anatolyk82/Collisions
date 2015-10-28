@@ -1,0 +1,140 @@
+/*!
+\page tutorial_game_menu_and_scenes.html tutorial
+\title The game menu and scenes
+\previouspage Collisions
+\nextpage The game scene
+
+ Commonly games have a menu, so does our game. It has a simple menu which allows the user to get information about the game, make settings (turn on/off music and sounds in the game) and select a level to play.
+
+\list
+ \li Game
+  \list
+   \li Levels
+    \list
+     \li Levels 1
+     \li Levels 2
+     \li ...
+     \li Levels 20
+    \endlist
+   \li Help
+  \endlist
+ \li Settings
+  \list
+   \li Music on/off
+   \li Sounds on/off
+  \endlist
+ \li Credits
+ \li Quit
+\endlist
+
+
+To create this project you can run QtCreator, create a new project, choose a template \e {“V-Play games”} and choose \e {“Template - Multi Scene Multi levels Template”}. It provides a starting point with V-Play based game with multiple scenes and multiple levels.
+\image qtcreator.jpg
+
+Our project structure is very similar to that template with some changes and additions.
+Each screen of the game is based on its own scene. Depending which one is selected by the user, it changes active scene (the property activeScene) for \l {http://v-play.net/doc/vplay-gamewindow} {GameWindow}.
+
+\qml
+GameWindow {
+   id: app
+   width: 854
+   height: 480
+
+   MenuScene {
+       id: menuScene
+       onSelectLevelPressed: app.state = "selectLevel"
+       onSettingsPressed: app.state = "settings"
+       onCreditsPressed: app.state = "credits"
+       // other signals from the scenes ...
+   }
+
+   // other scenes ...
+
+   // credits scene
+   CreditsScene {
+       id: creditsScene
+       onBackButtonPressed: app.state = "menu"
+   }
+
+   state: "menu"
+   activeScene: menuScene
+
+   states: [
+       State {
+           name: "menu"
+           PropertyChanges {target: menuScene; opacity: 1}
+           PropertyChanges {target: app; activeScene: menuScene}
+       },
+       State {
+           name: "selectLevel"
+           PropertyChanges {target: selectLevelScene; opacity: 1}
+           PropertyChanges {target: app; activeScene: selectLevelScene}
+       }
+       // other states ...
+   ]
+   //...
+}
+\endqml
+
+
+The state of the \l {http://v-play.net/doc/vplay-gamewindow} {GameWindow} has several values. When the user selects a menu item, he changes its state and it switches a current scene. Each scene inherits the main one called \l {BaseScene}. The \l {BaseScene} contains elements which are common for all screens such as a background picture, a back button, a header and some properties to describe states of the elements.
+
+\qml
+Scene {
+   id: baseScene
+   opacity: 0
+   visible: opacity > 0
+   enabled: visible
+
+   Behavior on opacity {
+     NumberAnimation {property: "opacity"; easing.type: Easing.InOutQuad}
+   }
+
+   property alias backText: buttonBack.text
+   property alias buttonBack: buttonBack
+
+   property alias imageBackground: imageBackground.source
+
+   property alias headerText: labelHeader.text
+   property alias header: labelHeader
+
+
+   //the back button
+   MenuButton {
+       id: buttonBack
+       //...
+   }
+
+   //background image
+   MultiResolutionImage {
+       id: imageBackground
+       //...
+   }
+
+   // the header
+   Label {
+       id: labelHeader
+       //...
+   }
+}
+\endqml
+
+So here is an example of scene.
+\image basescene.jpg
+
+The scene contains three elements from the \l {BaseScene}. They are marked with a red color: the background, the back button and the header.
+
+There are more common elements which help to form the user interface: \l {MenuButton}, \l {Label} and so on. They are located in a directory \e {common/}. For instance, the element \l {Label} loads a font to \l {http://doc.qt.io/qt-5/qml-qtquick-text.html} {Text} element and additionally opens a link in case if it is used.
+\qml
+Text {
+   id: txt
+   font.family: gameFontFont.name
+   onLinkActivated: { Qt.openUrlExternally(link) }
+
+   FontLoader {
+       id: gameFontFont
+       source: "../../assets/fonts/ofl.ttf"
+   }
+}
+\endqml
+*/
