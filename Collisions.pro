@@ -59,5 +59,9 @@ DISTFILES += \
     doc/images/game.jpg \
     doc/images/levels.jpg \
     doc/images/qtcreator.jpg \
-    doc/images/ic_launcher.png
+    doc/images/ic_launcher.png \
+    doc/images/dialog_pause.jpg \
+    doc/images/healthbar.jpg \
+    doc/images/medpack.png \
+    doc/images/usersBall.png
 

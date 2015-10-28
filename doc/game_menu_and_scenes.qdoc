@@ -119,12 +119,12 @@ Scene {
 }
 \endqml
 
-So here is an example of scene.
+Here is a screenshot of one game scene and here we can see some UI elements inherited from the \l {BaseScene}.
 \image basescene.jpg
 
-The scene contains three elements from the \l {BaseScene}. They are marked with a red color: the background, the back button and the header.
+The scene contains three elements from the \l {BaseScene}. They are marked with a red color: the background, the back button and the header. The same elements can be found on each game scene if they were not hidden purposefully.
 
-There are more common elements which help to form the user interface: \l {MenuButton}, \l {Label} and so on. They are located in a directory \e {common/}. For instance, the element \l {Label} loads a font to \l {http://doc.qt.io/qt-5/qml-qtquick-text.html} {Text} element and additionally opens a link in case if it is used.
+There are more common UI elements which help to form the user interface: \l {MenuButton}, \l {Label}, dialogs and so on. They are located in the directory \e {common/}. For instance, the element \l {Label} loads a font to \l {http://doc.qt.io/qt-5/qml-qtquick-text.html} {Text} element and additionally opens a link in case if it is used.
 \qml
 Text {
    id: txt
@@ -137,4 +137,191 @@ Text {
    }
 }
 \endqml
+
+The element \l {MenuButton} is used throughout the game. It’s a push button with a text label and a picture on it. The \l {MenuButton} can change the color of text label depending whether the button is pressed or checked. The same can be said about the picture. There are several properties for the button which can be used to manage those parameters. Let's have a look at the source code to clarify it:
+\qml
+Rectangle {
+    id: button
+
+    width: imageButton.width + buttonText.width + 40
+    height: 40
+
+    color: "transparent"
+
+    //This property holds the text shown on the button. If the button has no text, the text property will be an empty string.
+    property alias text: buttonText.text
+
+    //This signal is emitted when the button is clicked.
+    signal clicked()
+
+    //This property holds the icon shown on the button.
+    property url imageSource: ""
+
+    //This property holds the icon shown on the button when the button is pressed.
+    property url imageSourcePressed: ""
+
+    //This property holds the icon shown on the button when the button is checked.
+    property url imageSourceChecked: ""
+
+    //This property holds whether the button is checkable.
+    property bool checkable: false
+
+    //This property holds whether the button is checked.
+    property bool checked: false
+
+    //The color of the text shown on the button.
+    property color textColor: "black"
+
+    //The color of the text shown on the button when the button is pressed.
+    property color textColorPressed: "yellow"
+
+    //The color of the text shown on the button when the button is checked.
+    property color textColorChecked: "grey"
+
+    //The size of the text in pixels.
+    property alias textSize: buttonText.font.pixelSize
+
+    //Whether the sounds plays when the button is pressed.
+    property bool soundEnabled: true
+
+    clip: true
+
+    MultiResolutionImage {
+        id: imageButton
+        smooth: true
+        antialiasing: true
+        anchors.verticalCenter: parent.verticalCenter
+        anchors.left: parent.left
+        height: parent.height*0.9
+        fillMode: Image.PreserveAspectFit
+        source: mouseArea.pressed ? imageSourcePressed : (button.checkable ? (button.checked ? imageSource : imageSourceChecked) : imageSource)
+    }
+
+    Label {
+        id: buttonText
+        anchors.verticalCenter: parent.verticalCenter
+        anchors.left: imageButton.right
+        anchors.leftMargin: 12
+        font.pixelSize: 20
+        color: mouseArea.pressed ? textColorPressed : (button.checkable ? (button.checked ? textColor : textColorChecked) : textColor)
+    }
+
+    //cover the button with a mouse area
+    MouseArea {
+        id: mouseArea
+        anchors.fill: parent
+        onClicked: {
+            if( button.checkable ) {
+                button.checked = !button.checked
+            }
+            button.clicked()
+        }
+    }
+}
+\endqml
+
+Here we can see that the label and the image are changed depending whether the button is pressed or checked in case if it is checkable.
+
+Game dialogs are based on prepared pictures. They have the same structure and they inherit \l {http://v-play.net/doc/vplay-multiresolutionimage/} {MultiResulutionImage}. This is the code of one of them:
+\qml
+MultiResolutionImage {
+    id: imageDialogPause
+    z: 10
+    visible: false
+    smooth: true
+    antialiasing: true
+    anchors.centerIn: parent
+    source: "../../assets/dialogs/dialog_simple.png"
+    height: parent.height*0.7
+    width: parent.width*0.4
+
+    //This signal is emitted when the button "Resume" is clicked.
+    signal resumeClicked()
+
+    //This signal is emitted when the button "Restart" is clicked.
+    signal restartClicked()
+
+    Column {
+        spacing: 5
+        anchors.centerIn: parent
+        anchors.verticalCenterOffset: 16
+        Row {
+            anchors.horizontalCenter: parent.horizontalCenter
+            anchors.horizontalCenterOffset: 15
+            MenuButton {
+                id: buttonMusic
+                checkable: true
+                imageSource: "../../assets/buttons/button_music_blue.png"
+                imageSourcePressed: "../../assets/buttons/button_music_yellow.png"
+                imageSourceChecked:  "../../assets/buttons/button_music_grey.png"
+                text: ""
+                checked: settings.musicEnabled
+                onClicked: { settings.musicEnabled = checked }
+            }
+
+            MenuButton {
+                id: buttonSound
+                checkable: true
+                imageSource: "../../assets/buttons/button_sound_blue.png"
+                imageSourcePressed: "../../assets/buttons/button_sound_yellow.png"
+                imageSourceChecked:  "../../assets/buttons/button_sound_grey.png"
+                text: ""
+                checked: settings.soundEnabled
+                onClicked: { settings.soundEnabled = checked }
+            }
+        }
+
+        MenuButton {
+            id: buttonResume
+            z: 2
+            text: qsTr("Resume")
+            imageSource: "../../assets/buttons/button_ok_blue.png"
+            imageSourcePressed: "../../assets/buttons/button_ok_yellow.png"
+            soundEnabled: false
+            onClicked: {
+                imageDialogPause.close()
+                //continue the game
+                imageDialogPause.resumeClicked()
+                soundUnpause.play()
+            }
+        }
+        MenuButton {
+            id: buttonRestart
+            z: 2
+            text: qsTr("Restart")
+            imageSource: "../../assets/buttons/button_restart_blue.png"
+            imageSourcePressed: "../../assets/buttons/button_restart_yellow.png"
+            onClicked: {
+                imageDialogPause.close()
+                //retsart the game
+                imageDialogPause.restartClicked()
+            }
+        }
+    }
+
+    //It shows the dialog to the user.
+    function open() {
+        soundPause.play()
+        imageDialogPause.visible = true
+    }
+
+    //It closes the dialog.
+    function close() {
+        imageDialogPause.visible = false
+    }
+
+    SoundEffectVPlay {
+        id: soundPause
+        source: "../../assets/sounds/pause.wav"
+    }
+    SoundEffectVPlay {
+        id: soundUnpause
+        source: "../../assets/sounds/unpause.wav"
+    }
+}
+\endqml
+This one is shown whenever the player pauses the game. The dialog has four buttons \e {“Resume”} and \e {“Restart”} and two button to set music or sounds is on or off. It allows the player to manage sounds not leaving the game. The dialog has some sound effects which are played when the user changes settings. Other dialogs have the same structure. There are some differences based on how many buttons a dialog has. To notify the game about user's actions all dialogs have signals which are emitted when the user pushes a button on a dialog. If the users presses, for instance, the \e {"Resume"} button, an appropriate handler is called and unpauses the game so the user can continue to play.
+
+\image dialog_pause.jpg
+
 */

@@ -60,7 +60,7 @@ BaseScene {
 }
 \endqml
 
-We are going to create a lot of dynamic objects on the game field so this scene is connected to \l {http://v-play.net/doc/vplay-entitymanager} {EntityManager} which is described in \e {Main.qml}.
+We are going to create a lot of dynamic objects on the game field so this scene is connected to \l {http://v-play.net/doc/vplay-entitymanager} {EntityManager} which is described in \e {Main.qml}. The \l {http://v-play.net/doc/vplay-entitymanager} {EntityManager} takes ownership of all entities in the game so when the scene is ready it becomes the parent of the entities that were created with \l {http://v-play.net/doc/vplay-entitymanager} {EntityManager}.
 \qml
 GameWindow {
    id: app
@@ -178,5 +178,7 @@ PhysicsWorld {
 \endqml
 
 We create a new joint each time when the player touches on any ball on the game field. Whenever the player releases the touch, the joint is removed. To avoid an endless world we restricted it with walls.
+
+The game scene also contains some not physics objects. Some of them are used to display information about what is going on. It means they show time of current level or how much health the user’s ball has. Other elements are not visible and they only manage the game. All game objects will be considered in the next part of this tutorial.
 
 */

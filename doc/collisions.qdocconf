@@ -5,7 +5,7 @@ imagedirs = ./images
 
 sources.fileextensions = "*.qml *qdoc"
 
-outputdir = /home/tolik/Projects/QML/Collisions/generatedDocs #./html
+outputdir = /tmp/CollisionsTutorial/
 outputformats = HTML
 outputencoding = UTF-8
 

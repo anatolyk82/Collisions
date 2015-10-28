@@ -24,7 +24,7 @@ Item {
 
     /*!
       \qmlproperty int HealthBar::value
-      \brief A current value of health points.
+      \brief The current value of health points.
      */
     property int value: 50
 

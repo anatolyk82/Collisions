@@ -13,7 +13,7 @@ There are four types of physics objects on the game scene:
  \li Medpack
 \endlist
 
-To avoid an endless world we restrict it with walls. \l {Wall} is a physics object and it doesn't allow other objects to move out of the screen.
+To avoid an endless world we restrict it with walls. \l {Wall} is a physics object and it doesn't allow other objects to move out of the screen. The walls are attached to the edges of the screen and are not visible.
 \qml
 EntityBase {
    id: wall
@@ -33,7 +33,59 @@ EntityBase {
 }
 \endqml
 
+To let the user know how well he is playing a level there is a not physics element called \l {HealthBar}. The \l {HealthBar} accepts only three parameters: minimum and maximum values and the current amount of health points. By default the maximum value is 100 and the minimum value is 0. These values are used in the game and the current value always changes between them.
+\image healthbar.jpg
+\qml
+Item {
+    id: bar
+
+    //The maximum value of health points.
+    property int maxValue: 100
+
+    //The minimum value of health points.
+    property int minValue: 0
+
+    //The current value of health points.
+    property int value: 50
+
+    onValueChanged: {
+        value = (value < minValue) ? minValue : ( (value > maxValue) ? maxValue : value )
+    }
+
+    width: 120
+    height: 30
+
+    Image {
+        id: img
+        source: "../../assets/img/bar_health_empty.png"
+        width: parent.width
+        height: parent.height
+
+        Rectangle {
+            anchors.verticalCenter: parent.verticalCenter
+            anchors.verticalCenterOffset: -1
+            anchors.left: parent.left
+            anchors.leftMargin: bar.width*0.25
+            width: maxValue != 0 ? (bar.width - bar.width*0.33)*(value/maxValue) : (bar.width - bar.width*0.33)
+            Behavior on width { NumberAnimation { duration: 400 } }
+            height: bar.height*0.4
+            gradient: Gradient {
+                GradientStop { position: 0; color: "#ff3d9a" }
+                GradientStop { position: 1; color: "#fe007a" }
+            }
+        }
+
+        Label {
+            anchors.centerIn: parent
+            font.pixelSize: parent.height*0.4
+            text: value
+        }
+    }
+}
+\endqml
+
 The user’s ball is created dynamically in the function \e {start()}. We also need to know here when the ball is hit by others to change displaying the current amount of health in \l {HealthBar}.
+\image usersBall.png
 \code
 entityManager.createEntityFromUrlWithProperties ( Qt.resolvedUrl("../game/UsersBall.qml"), {
                     x: (world.width/2-usersBallSize),
@@ -74,21 +126,6 @@ fixture.onBeginContact: {
 \endcode
 In case if the user’s ball collides with another ball, it makes a collision sound and decrease its health. It also can collide with a medpack to restore health or walls.
 
-A medpack is an object which restores ball's health on a certain amount of points. We do not want lose game levels too fast because collisions happen quite often so we need such an object on the game field. \l {MedPack} is a physics object as well but it has the property sensor set true. It means it doesn't react on a collision but appropriate signal is emitted. We only need to remove a medpack if the player touches it with the ball.
-\code
-fixture.onBeginContact: {
-   var body = other.getBody();
-   var collidedEntity = body.target;
-   var collidedEntityType = collidedEntity.entityType;
-   if( collidedEntityType == "usersBallType" ) {
-      bonus.contactWithUsersBall( entityId )
-   }
-}
-\endcode
-
-So we can receive the signalcontactWithUsersBall() and remove it from the scene.
-Actually \l {MedPack} is just an inheritor of \l {BonusEntity} which can be used for further development. We can create other sensors for the game based on it.
-
 The user’s ball and other balls have a very similar structure with some differences. Both object contain a physics body \l {http://v-play.net/doc/vplay-circlecollider} {CircleCollider} with a round shape. The user’s ball changes its picture depending how much damage it has absorbed. Other balls shall start moving after their appearance. For this target an impulse is applied whenever a ball appears so it has such code:
 \code
 function pushBall() {
@@ -102,6 +139,22 @@ Component.onCompleted: {
 \endcode
 
 It pushes each ball right after its appearance. Later we will will realise how it takes values \e {ball.impulseX} and \e {ball.impulseY}.
+
+A medpack is an object which restores ball's health on a certain amount of points. We do not want lose game levels too fast because collisions happen quite often so we need such an object on the game field. \l {MedPack} is a physics object as well but it has the property sensor set true. It means it doesn't react on a collision but appropriate signal is emitted. We only need to remove a medpack if the player touches it with the ball.
+\image medpack.png
+\code
+fixture.onBeginContact: {
+   var body = other.getBody();
+   var collidedEntity = body.target;
+   var collidedEntityType = collidedEntity.entityType;
+   if( collidedEntityType == "usersBallType" ) {
+      bonus.contactWithUsersBall( entityId )
+   }
+}
+\endcode
+
+So we can receive the signalcontactWithUsersBall() and remove it from the scene.
+Actually \l {MedPack} is just an inheritor of \l {BonusEntity} which can be used for further development. We can create other sensors for the game based on it.
 
 There should be additional logic which helps to create dynamic objects like balls and medpacks. For these targets there are two game components called \l {BallGenerator} and \l {MedpackGenerator}. Let's consider both of those components and find out how they work.
 
