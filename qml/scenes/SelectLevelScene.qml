@@ -18,13 +18,13 @@ BaseScene {
      */
     signal levelPressed()
 
-    headerText: qsTr("Levels")
-
     /*!
       \qmlproperty int SelectLevelScene::howToPlayVisible
       \brief If this property is true, the scene shows a description how to play the game instead levels.
      */
     property bool howToPlayVisible: false
+
+    headerText: "" //qsTr("Levels")
 
     MenuButton {
         id: buttonHowToPlay
@@ -49,17 +49,26 @@ BaseScene {
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.top: header.bottom
         source: "../../assets/dialogs/dialog_level_select.png"
-        height: parent.height*0.8
-        width: parent.width*0.75
+        height: app.portrait ? parent.header*0.3 : parent.height*0.8
+        width: app.portrait ? parent.width*0.9 : parent.width*0.75
+
+        Label {
+            anchors.horizontalCenter: parent.horizontalCenter
+            anchors.top: parent.top
+            anchors.topMargin: app.portrait ? 20 : 10
+            text: qsTr("Levels")
+            font.pixelSize: 20
+            color: "blue"
+        }
 
         Rectangle {
             id: gridWrapper
             anchors.fill: parent
-            anchors.topMargin: 60
-            anchors.leftMargin: 21
-            anchors.rightMargin: 28
-            anchors.bottomMargin: 45
-            //border.color: "black"
+            anchors.topMargin: app.portrait ? 90 : 60
+            anchors.leftMargin: app.portrait ? 18 : 21
+            anchors.rightMargin: app.portrait ? 25 : 28
+            anchors.bottomMargin: app.portrait ? 70 : 45
+            border.color: "black"
             color: "transparent"
             clip: true
             Flickable {

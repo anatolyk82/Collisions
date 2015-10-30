@@ -15,8 +15,10 @@ MultiResolutionImage {
     antialiasing: true
     anchors.centerIn: parent
     source: "../../assets/dialogs/dialog_simple.png"
-    height: parent.height*0.5
-    width: parent.width*0.4
+    //height: parent.height*0.5
+    //width: parent.width*0.4
+    height: app.portrait ? parent.width*0.7 : parent.height*0.6
+    width: app.portrait ? parent.width*0.7 : parent.width*0.4
 
     /*!
       \qmlsignal void DialogGameOver::menuClicked()
@@ -32,17 +34,17 @@ MultiResolutionImage {
 
     Label {
         anchors.top: parent.top
-        anchors.topMargin: 10
+        anchors.topMargin: app.portrait ? 15 : 10
         anchors.horizontalCenter: parent.horizontalCenter
         text: qsTr("Game over")
         color: "#f3db95"
     }
 
     Column {
-        spacing: 5
+        spacing: 10
         width: parent.width*0.7
         anchors.centerIn: parent
-        anchors.horizontalCenterOffset: -10
+        anchors.horizontalCenterOffset: app.portrait ? 10 : -10
         anchors.verticalCenterOffset: 16
 
         MenuButton {

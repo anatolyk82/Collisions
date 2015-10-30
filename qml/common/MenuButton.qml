@@ -10,7 +10,7 @@ import VPlay 2.0
 Rectangle {
     id: button
 
-    width: imageButton.width + buttonText.width + 40
+    width: imageButton.width + buttonText.width + (button.text == "" ? 0 : 20)
     height: 40
 
     color: "transparent"
@@ -110,7 +110,7 @@ Rectangle {
         id: buttonText
         anchors.verticalCenter: parent.verticalCenter
         anchors.left: imageButton.right
-        anchors.leftMargin: 12
+        anchors.leftMargin: 10
         font.pixelSize: 20
         color: mouseArea.pressed ? textColorPressed : (button.checkable ? (button.checked ? textColor : textColorChecked) : textColor)
     }
@@ -119,7 +119,6 @@ Rectangle {
     MouseArea {
         id: mouseArea
         anchors.fill: parent
-        //hoverEnabled: true
         onClicked: {
             playSound("../../assets/sounds/button.wav")
             if( button.checkable ) {
@@ -127,8 +126,6 @@ Rectangle {
             }
             button.clicked()
         }
-        //onEntered: {}
-        //onExited: {}
     }
 
 

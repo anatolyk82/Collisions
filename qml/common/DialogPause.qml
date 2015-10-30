@@ -15,8 +15,8 @@ MultiResolutionImage {
     antialiasing: true
     anchors.centerIn: parent
     source: "../../assets/dialogs/dialog_simple.png"
-    height: parent.height*0.7
-    width: parent.width*0.4
+    height: app.portrait ? parent.width*0.8 : parent.height*0.7
+    width: app.portrait ? parent.width*0.7 : parent.width*0.4
 
     /*!
       \qmlsignal void DialogPause::resumeClicked()
@@ -36,8 +36,8 @@ MultiResolutionImage {
         anchors.verticalCenterOffset: 16
         Row {
             anchors.horizontalCenter: parent.horizontalCenter
-            anchors.horizontalCenterOffset: 15
-            //spacing: 30
+            //anchors.horizontalCenterOffset: app.portrait ? 0 : 0
+            spacing: app.portrait ? 20 : 30
             MenuButton {
                 id: buttonMusic
                 checkable: true

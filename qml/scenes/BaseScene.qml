@@ -86,7 +86,7 @@ Scene {
         id: labelHeader
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.top: parent.top
-        anchors.topMargin: 18
+        anchors.topMargin: app.portrait ? 50 : 18
         font.pixelSize: 32
         color: "blue"
         font.bold: true

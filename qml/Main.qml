@@ -14,8 +14,8 @@ import "scenes"
 
 GameWindow {
     id: app
-    width: 854
-    height: 480
+    width: 480//854
+    height: 854//480
 
     // You get free licenseKeys from http://v-play.net/licenseKey
     // With a licenseKey you can:
@@ -33,6 +33,9 @@ GameWindow {
     }
 
     //scaleMode: //TODO
+    onPortraitChanged: {
+        console.log("*** portrait:"+portrait)
+    }
 
     // menu scene
     MenuScene {
