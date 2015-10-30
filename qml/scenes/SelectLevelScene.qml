@@ -47,10 +47,11 @@ BaseScene {
         smooth: true
         antialiasing: true
         anchors.horizontalCenter: parent.horizontalCenter
-        anchors.top: header.bottom
+        anchors.top: parent.top
+        anchors.topMargin: 50
         source: "../../assets/dialogs/dialog_level_select.png"
-        height: app.portrait ? parent.header*0.3 : parent.height*0.8
-        width: app.portrait ? parent.width*0.9 : parent.width*0.75
+        height: app.portrait ? parent.header*0.65 : parent.height*0.8
+        width: app.portrait ? parent.width*0.95 : parent.width*0.75
 
         Label {
             anchors.horizontalCenter: parent.horizontalCenter
@@ -68,7 +69,7 @@ BaseScene {
             anchors.leftMargin: app.portrait ? 18 : 21
             anchors.rightMargin: app.portrait ? 25 : 28
             anchors.bottomMargin: app.portrait ? 70 : 45
-            border.color: "black"
+            //border.color: "black"
             color: "transparent"
             clip: true
             Flickable {

@@ -14,7 +14,7 @@ BaseScene {
 
     Column {
         anchors.centerIn: parent
-        spacing: 18
+        spacing: app.portrait ? 20 : 18
 
         MenuButton {
             id: buttonMusicEnable

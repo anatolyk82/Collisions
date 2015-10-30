@@ -18,8 +18,8 @@ MultiResolutionImage {
     antialiasing: true
     anchors.centerIn: parent
     source: "../../assets/dialogs/dialog_level_complete_0.png"
-    height: parent.height*0.75
-    width: parent.width*0.4
+    height: app.portrait ? parent.width*0.8 : parent.height*0.75
+    width: app.portrait ? parent.width*0.7 : parent.width*0.4
 
     /*!
       \qmlsignal void DialogGameEnded::menuClicked()

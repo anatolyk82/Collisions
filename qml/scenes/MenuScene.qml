@@ -45,7 +45,7 @@ BaseScene {
     Column {
         anchors.centerIn: parent
         anchors.verticalCenterOffset: 10
-        spacing: 15
+        spacing: app.portrait ? 20 : 15
         z: 5
         MenuButton {
             text: qsTr("Game")

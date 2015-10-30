@@ -32,7 +32,6 @@ GameWindow {
         id: entityManager
     }
 
-    //scaleMode: //TODO
     onPortraitChanged: {
         console.log("*** portrait:"+portrait)
     }

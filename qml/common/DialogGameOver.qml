@@ -17,8 +17,8 @@ MultiResolutionImage {
     source: "../../assets/dialogs/dialog_simple.png"
     //height: parent.height*0.5
     //width: parent.width*0.4
-    height: app.portrait ? parent.width*0.7 : parent.height*0.6
-    width: app.portrait ? parent.width*0.7 : parent.width*0.4
+    height: app.portrait ? parent.width*0.65 : parent.height*0.6
+    width: app.portrait ? parent.width*0.65 : parent.width*0.4
 
     /*!
       \qmlsignal void DialogGameOver::menuClicked()
