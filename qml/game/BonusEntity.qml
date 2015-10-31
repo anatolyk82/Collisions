@@ -32,10 +32,10 @@ EntityBase {
     property alias sourceImage: imageBonus.source
 
     /*!
-      \qmlsignal void BonusEntity::contactWithUsersBall( string entityId )
+      \qmlsignal void BonusEntity::contactWithUsersBall( string medpackEntityId )
       \brief It is emitted when the user's ball contacts with the bonus item.
      */
-    signal contactWithUsersBall( string entityId )
+    signal contactWithUsersBall( string medpackEntityId )
 
     Image {
         id: imageBonus
@@ -64,9 +64,10 @@ EntityBase {
         fixture.onBeginContact: {
             var body = other.getBody();
             var collidedEntity = body.target;
-            var collidedEntityType = collidedEntity.entityType;
+            var collidedEntityId = collidedEntity.entityId
+            var collidedEntityType = collidedEntity.entityType
             if( collidedEntityType == "usersBallType" ) {
-                bonus.contactWithUsersBall( entityId )
+                bonus.contactWithUsersBall( entityId ) //here entityId is an Id of the current medpack.
             }
         }
     }

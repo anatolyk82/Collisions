@@ -88,11 +88,11 @@ Item {
     }
 
     /*!
-      \qmlmethod void MedpackGenerator::medpackIsBeingTouchedByUser()
+      \qmlmethod void MedpackGenerator::medpackIsBeingTouchedByUser( string medpackEntityId )
       This slot removes a medpack from the game scene when the user touches it with the ball
      */
-    function medpackIsBeingTouchedByUser( entityId ) {
-        entityManager.removeEntityById(entityId)
+    function medpackIsBeingTouchedByUser( medpackEntityId ) {
+        entityManager.removeEntityById( medpackEntityId )
     }
 
     SoundEffectVPlay {

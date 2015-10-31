@@ -96,12 +96,18 @@ Item {
     }
 
 
+    /*!
+      \qmlproperty int MedpackGenerator::_ballUniqueId
+     */
+    property int _ballUniqueId: 0   //helps to generate a ball with a unique Id
+
     Timer {
         id: timerPrepareAppearance
         interval: generator.preparatoryInterval
         triggeredOnStart: false
         repeat: false
         onTriggered: {
+            _ballUniqueId += 1
             //time to create a ball
             //remove the particle system
             spriteAppearance.running = false
@@ -112,10 +118,11 @@ Item {
             var impulseX = impulse * Math.cos(angle * Math.PI / 180);
             var impulseY = impulse * Math.sin(angle * Math.PI / 180);
 
-            //entityManager.createEntityFromComponentWithProperties(
+            var ballId = "ballId" + _ballUniqueId
             entityManager.createEntityFromUrlWithProperties(
                         Qt.resolvedUrl("Ball.qml"),
                         {
+                            entityId: ballId,
                             x: ballX,
                             y: ballY,
                             radius: generator.ballSize,
@@ -125,11 +132,22 @@ Item {
                         }
                         )
 
+            var ballObject = entityManager.getEntityById( ballId )
+            ballObject.ballHasNoHealth.connect( ballHasNoHealth )
+
             //count the nex interval for a ball
             timerIntervalBetweenBalls.start()
         }
     }
 
+
+    /*!
+      \qmlmethod void Ball::ballHasNoHealth( string ballEntityId )
+      This slot removes a ball from the game scene when the ball has no health anymore
+     */
+    function ballHasNoHealth( ballEntityId ) {
+        entityManager.removeEntityById( ballEntityId )
+    }
 
 
     /* This timer counts the interval between two balls minus the preparatory interval */

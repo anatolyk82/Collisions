@@ -43,6 +43,13 @@ EntityBase {
 
 
     /*!
+      \qmlproperty int Ball::damage
+      \brief How much health the user's ball takes away
+     */
+    property int damage: 50
+
+
+    /*!
       \qmlproperty int UsersBall::__currentHealthPrev
      */
     property int __currentHealthPrev: totalHealth

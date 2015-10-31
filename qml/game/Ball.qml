@@ -44,6 +44,42 @@ EntityBase {
      */
     property int damage: 10
 
+
+    /*!
+      \qmlproperty int Ball::totalHealth
+      \brief This property holds the maximum value of health points a has.
+      The default value is 100
+     */
+    property int totalHealth: 100
+
+    /*!
+      \qmlproperty int Ball::currentHealth
+      \brief This property holds how many health points a ball has.
+      The default value is \a totalHealth
+     */
+    property int currentHealth: totalHealth
+
+
+    /*!
+      \qmlsignal void Ball::contactWithUsersBall( string ballEntityId )
+      \brief It is emitted when the user's ball contacts a ball.
+     */
+    signal contactWithUsersBall( string ballEntityId )
+
+
+    /*!
+      \qmlsignal void Ball::ballHasNoHealth( string ballEntityId )
+      \brief It is emitted when ball's health is 0.
+     */
+    signal ballHasNoHealth( string ballEntityId )
+
+    onCurrentHealthChanged: {
+        currentHealth = currentHealth < 0 ? 0 : ((currentHealth > totalHealth) ? totalHealth : currentHealth)
+        if( currentHealth == 0 ) {
+            ball.ballHasNoHealth( ball.entityId )
+        }
+    }
+
     CircleCollider {
         id: ballCollider
         anchors.centerIn: parent
@@ -59,6 +95,9 @@ EntityBase {
             var collidedEntityType = collidedEntity.entityType;
             if( collidedEntityType == "wallType" ) {
                 playSound("../../assets/sounds/ballOnWall.wav")
+            } else if( collidedEntityType == "usersBallType" ) {
+                currentHealth -= collidedEntity.damage
+                contactWithUsersBall( ball.entityId )
             }
         }
     }
